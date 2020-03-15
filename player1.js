@@ -1,45 +1,54 @@
 //Function 1
 //For instance, if the tab isn’t active it will stop making calls until it becomes active again.
-var animation = window.requestAnimationFrame ||
+var animate = window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame ||
     function(callback) { window.setTimeout(callback, 1000/60) };
 
-//Canvas
+//canvas
 var canvas = document.createElement('canvas');
 var width = 400;
 var height = 600;
 canvas.width = width;
 canvas.height = height;
-var timeleft = 30;
-var colorBall = "#000000";
 var context = canvas.getContext('2d');
 
-//Page first load
-//attach the canvas to the screen
+var player1 = new Player1();
+var player2 = new Player2();
+var ball = new Ball(200,300);
+
+var timeleft = 30;
+var ballColor = "black";
+
+
+var xPaddle = 50;
+
 window.onload = function() {
     document.body.appendChild(canvas);
-    animation(initiate);
+    animate(step);
 };
 
-//update all of our objects
-//render those objects
-var initiate = function() {
+function step(){
     update();
     render();
-    animation(initiate);
-};
+    animate(step);
+}
 
 var update = function() {
+    player1.update();
+    player2.update();
+    ball.update(player1.paddle, player2.paddle);
 };
 
 var render = function() {
-    context.fillStyle = "#FF00FF"; //BackgroundColor
-    context.fillRect(0, 0, width, height); //Fill the rectangle
+    context.fillStyle = "#FF00FF";
+    context.fillRect(0, 0, width, height);
+    player1.render();
+    player2.render();
+    ball.render();
 };
 
-
-//Adding object to the canvas -- Paddle
+//Adding Paddle
 function Paddle(x, y, width, height) {
     this.x = x;
     this.y = y;
@@ -54,24 +63,26 @@ Paddle.prototype.render = function() {
     context.fillRect(this.x, this.y, this.width, this.height);
 };
 
-function Player() {
+//Player 1
+function Player1() {
     this.paddle = new Paddle(175, 580, 50, 10);
 }
-
-function Player1() {
-    this.paddle = new Paddle(175, 10, 50, 10);
-}
-
-Player.prototype.render = function() {
-    this.paddle.render();
-};
 
 Player1.prototype.render = function() {
     this.paddle.render();
 };
 
-//Adding object to the canvas -- Ball
-function Ball(x, y) {
+//Player 2
+function Player2() {
+    this.paddle = new Paddle(175, 10, 50, 10);
+}
+
+Player2.prototype.render = function() {
+    this.paddle.render();
+};
+
+//Add ball
+function Ball(x,y){
     this.x = x;
     this.y = y;
     this.x_speed = 0;
@@ -82,43 +93,21 @@ function Ball(x, y) {
 Ball.prototype.render = function() {
     context.beginPath();
     context.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
-    context.fillStyle = colorBall;
+    context.fillStyle = "#000000";
     context.fill();
-    if (timeleft < 25){
+    if (timeleft < 25) {
         context.beginPath();
         context.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
         context.fillStyle = "#00FF00";
         context.fill();
-        colorBall = "#00FF00";
+        ballColor = "green";
     }
 };
 
-//Build the objects
-var player = new Player();
-var player1 = new Player1();
-var ball = new Ball(200, 300);
-
-var render = function() {
-    context.fillStyle = "#FF00FF";
-    context.fillRect(0, 0, width, height);
-    player.render();
-    player1.render();
-    ball.render();
-};
-
 //Animating the ball
-var update = function() {
-    ball.update();
-};
-
 Ball.prototype.update = function() {
     this.x += this.x_speed;
     this.y += this.y_speed;
-};
-
-//Making the ball bounce on paddles
-var update = function() {
-    ball.update(player.paddle, player1.paddle);
 };
 
 Ball.prototype.update = function(paddle1, paddle2) {
@@ -142,38 +131,18 @@ Ball.prototype.update = function(paddle1, paddle2) {
         this.y_speed = 3;
         this.x = 200;
         this.y = 300;
-        colorBall = "#000000";
-        //Ball color back to normal
-        Ball.prototype.render = function() {
-            context.beginPath();
-            context.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
-            context.fillStyle = colorBall;
-            context.fill();
-        };
     }
 
     if(top_y > 300) {
         if(top_y < (paddle1.y + paddle1.height) && bottom_y > paddle1.y && top_x < (paddle1.x + paddle1.width) && bottom_x > paddle1.x) {
-            // hit the player's paddle
+            // hit the player1's paddle
             this.y_speed = -3;
             this.x_speed += (paddle1.x_speed / 2);
             this.y += this.y_speed;
-        }
-        if(top_y < (paddle1.y + paddle1.height) && bottom_y > paddle1.y && top_x < (paddle1.x + paddle1.width) && bottom_x > paddle1.x &&
-        colorBall=="#00FF00") {
-            // hit the player's paddle when ball is green
-            this.y_speed = -3;
-            this.x_speed += (paddle1.x_speed / 2);
-            this.y += this.y_speed;
-            Paddle.prototype.render = function() {
-                context.fillStyle = "#0000FF";
-                this.width =100;
-                context.fillRect(this.x, this.y, this.width, this.height);
-            };
         }
     } else {
         if(top_y < (paddle2.y + paddle2.height) && bottom_y > paddle2.y && top_x < (paddle2.x + paddle2.width) && bottom_x > paddle2.x) {
-            // hit the player1's paddle
+            // hit the player2's paddle
             this.y_speed = 3;
             this.x_speed += (paddle2.x_speed / 2);
             this.y += this.y_speed;
@@ -181,8 +150,8 @@ Ball.prototype.update = function(paddle1, paddle2) {
     }
 };
 
+//Controls
 var keysDown = {};
-//Controls -- Player1 (Controls with <- and ->)
 
 window.addEventListener("keydown", function(event) {
     keysDown[event.keyCode] = true;
@@ -192,7 +161,22 @@ window.addEventListener("keyup", function(event) {
     delete keysDown[event.keyCode];
 });
 
-Player.prototype.update = function() {
+Paddle.prototype.move = function(x, y) {
+    this.x += x;
+    this.y += y;
+    this.x_speed = x;
+    this.y_speed = y;
+    if(this.x < 0) { // all the way to the left
+        this.x = 0;
+        this.x_speed = 0;
+    } else if (this.x + this.width > 400) { // all the way to the right
+        this.x = 400 - this.width;
+        this.x_speed = 0;
+    }
+}
+
+//Player 1 controls
+Player1.prototype.update = function() {
     for(var key in keysDown) {
         var value = Number(key);
         if(value == 37) { // left arrow
@@ -205,28 +189,13 @@ Player.prototype.update = function() {
     }
 };
 
-Paddle.prototype.move = function(x, y) {
-    this.x += x;
-    this.y += y;
-    this.x_speed = x;
-    this.y_speed = y;
-    if(this.x < 0) { // all the way to the left
-        this.x = 0;
-        this.x_speed = 0;
-    } else if (this.x + this.width > 400) { // all the way to the right
-        this.x = 400 - this.width;
-        this.x_speed = 0;
-    }
-}
-
-//Player 2
-
-Player1.prototype.update = function() {
+//Player 2 controls
+Player2.prototype.update = function() {
     for(var key in keysDown) {
         var value = Number(key);
-        if(value == 65) { // left arrow
+        if(value == 65) { // left (a)
             this.paddle.move(-4, 0);
-        } else if (value == 68) { // right arrow
+        } else if (value == 68) { // right (a)ddddda
             this.paddle.move(4, 0);
         } else {
             this.paddle.move(0, 0);
@@ -234,30 +203,18 @@ Player1.prototype.update = function() {
     }
 };
 
-Paddle.prototype.move = function(x, y) {
-    this.x += x;
-    this.y += y;
-    this.x_speed = x;
-    this.y_speed = y;
-    if(this.x < 0) { // all the way to the left
-        this.x = 0;
-        this.x_speed = 0;
-    } else if (this.x + this.width > 400) { // all the way to the right
-        this.x = 400 - this.width;
-        this.x_speed = 0;
-    }
-}
-
-var update = function() {
-    player.update();
-    player1.update();
-    ball.update(player.paddle, player1.paddle);
-};
-
 //Timer
-
 var downloadTimer = setInterval(function(){
-    console.log(timeleft)
-
     timeleft -= 1;
 }, 1000);
+
+//Bonus 1 -- Ball green
+
+
+
+
+
+
+
+
+

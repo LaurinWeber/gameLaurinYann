@@ -37,7 +37,7 @@ var render = function() {
 };
 
 
-//Adding object to the canvas -- Paddle
+//Adding object to the canvas -- Raket
 function Paddle(x, y, width, height) {
     this.x = x;
     this.y = y;
@@ -53,7 +53,7 @@ Paddle.prototype.render = function() {
 };
 
 function Player() {
-    this.paddle = new Paddle(175, 580, 50, 10);
+    this.raket = new Paddle(175, 580, 50, 10);
 }
 
 function Computer() {
@@ -61,7 +61,7 @@ function Computer() {
 }
 
 Player.prototype.render = function() {
-    this.paddle.render();
+    this.raket.render();
 };
 
 Computer.prototype.render = function() {
@@ -109,7 +109,7 @@ Ball.prototype.update = function() {
 
 //Making the ball bounce on paddles
 var update = function() {
-    ball.update(player.paddle, computer.paddle);
+    ball.update(player.raket, computer.paddle);
 };
 
 Ball.prototype.update = function(paddle1, paddle2) {
@@ -137,14 +137,14 @@ Ball.prototype.update = function(paddle1, paddle2) {
 
     if(top_y > 300) {
         if(top_y < (paddle1.y + paddle1.height) && bottom_y > paddle1.y && top_x < (paddle1.x + paddle1.width) && bottom_x > paddle1.x) {
-            // hit the player's paddle
+            // hit the player1's raket
             this.y_speed = -3;
             this.x_speed += (paddle1.x_speed / 2);
             this.y += this.y_speed;
         }
     } else {
         if(top_y < (paddle2.y + paddle2.height) && bottom_y > paddle2.y && top_x < (paddle2.x + paddle2.width) && bottom_x > paddle2.x) {
-            // hit the player1's paddle
+            // hit the Player1's raket
             this.y_speed = 3;
             this.x_speed += (paddle2.x_speed / 2);
             this.y += this.y_speed;
@@ -164,18 +164,18 @@ window.addEventListener("keyup", function(event) {
 
 var update = function() {
     player.update();
-    ball.update(player.paddle, computer.paddle);
+    ball.update(player.raket, computer.paddle);
 };
 
 Player.prototype.update = function() {
     for(var key in keysDown) {
         var value = Number(key);
         if(value == 37) { // left arrow
-            this.paddle.move(-4, 0);
+            this.raket.move(-4, 0);
         } else if (value == 39) { // right arrow
-            this.paddle.move(4, 0);
+            this.raket.move(4, 0);
         } else {
-            this.paddle.move(0, 0);
+            this.raket.move(0, 0);
         }
     }
 };
@@ -198,7 +198,7 @@ Paddle.prototype.move = function(x, y) {
 var update = function() {
     player.update();
     computer.update(ball);
-    ball.update(player.paddle, computer.paddle);
+    ball.update(player.raket, computer.paddle);
 };
 
 Computer.prototype.update = function(ball) {
