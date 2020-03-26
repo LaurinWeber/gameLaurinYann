@@ -5,7 +5,8 @@ h1,h2{
 }
 
 .button{
-    margin-left: 940px;
+    margin-left: 740px;
+    margin-bottom: 50px;
 }
 
 #gameScreen {
@@ -21,4 +22,12 @@ h1,h2{
 
 #player {
     padding-left: 1000px;
+}
+
+.start{
+    background-color: aqua;
+    padding-bottom: 200px;
+    padding-top: 200px;
+    margin-left: 200px;
+    margin-right: 200px;
 }
