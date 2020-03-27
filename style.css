@@ -1,13 +1,17 @@
-h1,h2{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+h1, h2 {
+    margin-left: 40%;
+    font-family: "TComic Sans MS", cursive, sans-serif;
 }
 
-.button{
-    margin-left: 740px;
-    margin-bottom: 50px;
+.button {
+    display: inline-block;
+    margin-left: 30%;
+    margin-top: 45px;
+    border-radius: 12px;
+    padding: 10px;
+    background-color: #00b3b3;
 }
+
 
 #gameScreen {
     border: 1px solid black;
@@ -24,10 +28,13 @@ h1,h2{
     padding-left: 1000px;
 }
 
-.start{
-    background-color: aqua;
-    padding-bottom: 200px;
-    padding-top: 200px;
-    margin-left: 200px;
+.start {
+    background-image: url("assets/background.gif");
+    width: 700px;
+    height: 128px;
+    padding-bottom: 100px;
+    padding-top: 100px;
+    margin-left: 400px;
     margin-right: 200px;
+    border: 2px solid black;
 }
