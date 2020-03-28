@@ -21,7 +21,7 @@ h1, h2 {
     margin-right: auto;
     display: block;
     width: 800px;
-    background-color: aqua;
+    background-color: black;
 }
 
 #player {
@@ -37,4 +37,8 @@ h1, h2 {
     margin-left: 400px;
     margin-right: 200px;
     border: 2px solid black;
+}
+
+#img_ball{
+    display: none;
 }
