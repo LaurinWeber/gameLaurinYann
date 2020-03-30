@@ -13,13 +13,13 @@ const GAMESTATE = {
     GAMEOVER: 3
 };
 
-export default class Game {
+export default class GameSinglePlayer {
     constructor(gameWidth, gameHeight) {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
     }
 
-    start(){
+    create(){
 
         this.gamestate = GAMESTATE.MENU;
 
