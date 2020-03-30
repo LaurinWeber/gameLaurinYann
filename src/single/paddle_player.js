@@ -1,50 +1,55 @@
-export default class Paddle {
+export default class Paddle_player {
 
-    constructor(game){
-
+    constructor(game) {
+        // get game boundaries
         this.gameWidth = game.gameWidth;
+        this.gameHeight = game.gameHeight;
 
-        this.width = 150;
-        this.height = 30;
+        //define Paddle size
+        this.width = 30;
+        this.height = 150;
 
-        this.maxSpeed = 7;
-        this.speed = 0;
+        //define paddle speed
+        this.maxSpeed = 7; //in game
+        this.speed = 0; //at pause, start
 
+        //define start position
         this.position = {
-            x: game.gameWidth / 2 - this.width / 2,
-            y: game.gameHeight - this.height - 10
+            x: 50,
+            y: game.gameHeight / 2 + this.height / 2
         };
-
     }
 
-    moveLeft(){
-        this.speed =-this.maxSpeed;
+    moveUp() {
+        this.speed -= this.maxSpeed;
     }
 
-    moveRight(){
-        this.speed = this.maxSpeed;
+    moveDown() {
+        this.speed += this.maxSpeed;
     }
 
-    stop(){
+    stop() {
         this.speed = 0;
     }
 
-    draw(context){
+    draw(context) {
         context.fillStyle = "#ffffff"
-        context.fillRect(this.position.x,this.position.y,this.width,this.height);
-
+        context.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
 
-    update(deltaTime){
 
-        this.position.x += this.speed;
+    update(deltaTime) {
 
-        if(this.position.x < 0){
-            this.position.x =0;
+        this.position.y += this.speed;
+
+        //define boundary top
+        if (this.position.y < 0 - this.height) {
+            this.position.y = -this.height;
         }
 
-        if(this.position.x + this.width > this.gameWidth){
-            this.position.x =this.gameWidth-this.width;
+        //define boundary bottom
+        if (this.position.y + this.height > this.gameHeight + this.height) {
+            this.position.y = this.gameHeight + this.height;
         }
     }
 

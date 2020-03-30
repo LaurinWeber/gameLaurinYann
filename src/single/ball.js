@@ -2,34 +2,53 @@
 export default class Ball {
 
     constructor(game){
+        // pass ref
+        this.game = game;
 
+        // get img from the ball
         this.image = document.getElementById("img_ball");
+        this.size = 20; // define size (x = 20 & y = 20 px)
 
+        // define boundaries for the ball, as already defined in game.js
         this.gameWidth = game.gameWidth;
         this.gameHeight = game.gameHeight;
 
-        this.game = game;
+        // define start pos of the ball
+        this.position = {x: this.gameWidth/2, y: this.gameHeight/2};
 
-        this.position = {x: 10, y: 10};
+        // start speed
+        this.speed = 5;
+        // start direction (the player starts)
+        this.velX = -5;
+        this.velY = 0;
 
-        this.speed ={x: 4, y: 2};
+        this.angle = {top: 45, upperCenter: 20, center: 0, lowerCenter: -20, bottom: -45};
 
-        this.size = 20;
+        // ball launch, game (Anspiel)
+        this.launch = true;
 
-        this.score1 = 0;
-        this.score2 = 0;
-
+        // couter for the score
+        this.scorePlayer = 0;
+        this.scoreEnemy = 0;
     }
 
-
+    // draw ball and score
     draw(context){
         context.drawImage(this.image,this.position.x,this.position.y,this.size,this.size);
         context.font = "bold 24px Arial";
-        context.fillText(this.score1, 0, 300);
-        context.fillText(this.score2, 785, 300);
+        context.fillText(this.scorePlayer, 0, 300);
+        context.fillText(this.scoreEnemy, 785, 300);
     }
 
+
     update(deltaTime){
+
+        this.game.player.position.x;
+        // get colision
+
+
+
+        /*
         this.position.x += this.speed.x;
         this.position.y += this.speed.y;
 
@@ -72,7 +91,7 @@ export default class Ball {
         if (topOfBall2 <= bottomOfPaddle2 && this.position.x >= leftSideOfPaddle2 && this.position.x + this.size <= rightSideOfPaddle2){
             this.speed.y =- this.speed.y;
             this.position.y = this.game.paddle2.position.y + this.size;
-        }
+        }*/
 
     }
 

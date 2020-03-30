@@ -1,38 +1,15 @@
-export default class InputHandler2 {
+export default class InputHandler_AI {
+
+    // player on the left
+    // AI on the right of the canvas
 
     constructor(game, paddle, ball) {
-s
-        document.addEventListener("keydown", event => {
 
-            switch (event.keyCode) {
-                case 65:
-                    paddle.moveLeft();
-                    break;
-                case 68:
-                    paddle.moveRight(); //-->
-                    break;
-            }
-        });
+        // 1.) if pos.Ball "X" > 0 -> move paddle to the center
 
-        //Stopping the paddle when key released
+            // 2.) if pos.Ball "Y" > pos. paddle_AI "Y" 
 
-        document.addEventListener("keyup", event => {
 
-            switch (event.keyCode) {
-                case 65:
-                    if (paddle.speed < 0) {
-                        paddle.stop();
-                    }
-
-                    break;
-                case 68:
-                    if (paddle.speed > 0) {
-                        paddle.stop();
-                    }
-                    break;
-
-            }
-        });
 
 
     }

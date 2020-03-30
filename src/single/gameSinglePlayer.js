@@ -1,8 +1,10 @@
-import Paddle from "./paddle.js";
-import Paddle2 from "./paddle2.js";
 import Ball from "./ball.js";
-import InputHandler from "./inputHandler.js";
-import InputHandler2 from "./inputHandler2.js";
+
+import Paddle_player from "./paddle_player";
+import Paddle_AI from "./paddle_AI";
+
+import InputHandler_player from "./inputHandler_player";
+import InputHandler_AI from "./inputHandler_AI";
 
 const GAMESTATE = {
     PAUSED: 0,
@@ -12,8 +14,6 @@ const GAMESTATE = {
 };
 
 export default class Game {
-
-
     constructor(gameWidth, gameHeight) {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
@@ -23,33 +23,27 @@ export default class Game {
 
         this.gamestate = GAMESTATE.MENU;
 
-        this.paddle = new Paddle(this);
-        this.paddle2 = new Paddle2(this)
-
+        this.paddle_player = new Paddle_player(this);
+        this.paddle_AI = new Paddle_AI(this)
         this.ball = new Ball(this);
 
         this.gameObjects = [
-            this.paddle,
-            this.paddle2,
+            this.paddle_player,
+            this.paddle_AI,
             this.ball
         ];
 
-        new InputHandler(this.paddle, this);
-        new InputHandler2(this.paddle2, this);
+        new InputHandler_player(this.paddle_player, this);
+        new InputHandler_AI(this.paddle_AI, this);
 
     }
 
-
-
     update(deltaTime){
-
         //Stop updating when paused or in Menu
         if (this.gamestate === GAMESTATE.PAUSED){
             return;
         }
-
         this.gameObjects.forEach((object)=>object.update(deltaTime));
-
     }
 
 
