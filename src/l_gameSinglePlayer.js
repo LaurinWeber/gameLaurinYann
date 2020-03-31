@@ -1,10 +1,11 @@
 import Ball from "./l_ball.js";
 
-import L_paddle_player from "./l_paddle_player";
-import L_paddle_AI from "./l_paddle_AI";
+import L_paddle_player from "./l_paddle_player.js";
+import L_paddle_AI from "./l_paddle_AI.js";
 
-import L_inputHandler_player from "./l_inputHandler_player";
-import L_inputHandler_AI from "./l_inputHandler_AI";
+import L_inputHandler_player from "./l_inputHandler_player.js";
+import L_inputHandler_AI from "./l_inputHandler_AI.js";
+import L_ball from "./l_ball.js";
 
 const GAMESTATE = {
     PAUSED: 0,
@@ -25,7 +26,7 @@ export default class L_gameSinglePlayer {
 
         this.paddle_player = new L_paddle_player(this);
         this.paddle_AI = new L_paddle_AI(this)
-        this.ball = new Ball(this);
+        this.ball = new L_ball(this);
 
         this.gameObjects = [
             this.paddle_player,
@@ -38,12 +39,12 @@ export default class L_gameSinglePlayer {
 
     }
 
-    update(deltaTime){
+    update(){
         //Stop updating when paused or in Menu
         if (this.gamestate === GAMESTATE.PAUSED){
             return;
         }
-        this.gameObjects.forEach((object)=>object.update(deltaTime));
+        this.gameObjects.forEach((object)=>object.update());
     }
 
 

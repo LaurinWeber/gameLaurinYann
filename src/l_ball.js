@@ -1,8 +1,6 @@
-
-
 export default class L_ball {
 
-    constructor(game){
+    constructor(game) {
         // pass ref
         this.game = game;
 
@@ -15,7 +13,7 @@ export default class L_ball {
         this.gameHeight = game.gameHeight;
 
         // define start pos of the ball
-        this.position = {x: this.gameWidth/2, y: this.gameHeight/2};
+        this.position = {x: this.gameWidth / 2, y: this.gameHeight / 2};
 
         // start speed
         this.speed = 5;
@@ -23,7 +21,16 @@ export default class L_ball {
         this.velocity_X = -5;
         this.velocity_Y = 0;
 
-        this.angle = {top: 45, upperCenter: 20, center: 0, lowerCenter: -20, bottom: -45};
+        this.angle = {  top: 45,
+                        upperCenter: 20,
+                        center: 0,
+                        lowerCenter: -20,
+                        bottom: -45};
+        this.radiants = {   top: this.angle.top*Math.PI/180,
+                            upperCenter: this.angle.upperCenter*Math.PI/180,
+                            center: this.angle.center*Math.PI/180,
+                            lowerCenter: this.angle.lowerCenter*Math.PI/180,
+                            bottom: this.angle.bottom*Math.PI/180}
 
         // ball launch, game (Anspiel)
         this.launch = true;
@@ -34,18 +41,20 @@ export default class L_ball {
     }
 
     // draw ball and score
-    draw(context){
-        context.drawImage(this.image,this.position.x,this.position.y,this.size,this.size);
+    draw(context) {
+        context.drawImage(this.image, this.position.x, this.position.y, this.size, this.size);
         context.font = "bold 24px Arial";
         context.fillText(this.scorePlayer, 0, 300);
         context.fillText(this.scoreEnemy, 785, 300);
     }
 
+    //ball moves
+    update() {
 
-    update(deltaTime){
+
         // position of paddels
         //player
-        let player_x = this.game.paddle_player.position.x; //constant
+        let player_x = this.game.paddle_player.position.x;
         let player_y = this.game.paddle_player.position.y;
         // AI
         let ai_x = this.game.paddle_AI.position.x; //constant
@@ -56,22 +65,62 @@ export default class L_ball {
         let paddle_width = this.game.paddle_player.width; // constant
 
         // ball moving to the left
-        if(this.velocity_X < 0){
-            if(this.position.x == player_x + paddle_width){ //Ball on height of paddle player
+        if (this.velocity_X < 0) {
+            this.position.x += this.velocity_X;
+            this.position.y += this.velocity_Y;
+            //paddle (left)
+            if (this.position.x == player_x + paddle_width) { //Ball on height of paddle player
+                if (this.position.y + this.size > player_y && this.position.y < player_y + paddle_height) { // ball hits paddle
+                    /*
+                    //define hitzone
+                    //1.) hit at top "border" of paddle (rebounce: 45°)
+                    if(this.position.y + this.size == player_y){
+                        this.velocity_X = 1* Math.cos(this.angle.top)*this.speed;
+                        this.velocity_Y = 1* Math.sin(this.angle.top)*this.speed;
+                    }
+                    //2.) hit at upper center section of paddle (rebounce: 20°)
+                    else if (this.position.y + this.size > player_y && this.position.y < player_y + (paddle_height / 3)) {
+                        this.velocity_X = 1* Math.cos(this.angle.upperCenter)*this.speed;
+                        this.velocity_Y = 1* Math.sin(this.angle.upperCenter)*this.speed;
+                    }*/
+                    //3.) hit at center of paddle (rebounce: 0°)
+                    if (this.position.y + this.size > player_y + (paddle_height / 3) && this.position.y < player_y + (2 * paddle_height / 3)) {
+                        this.velocity_X = Math.cos(this.radiants.center)*this.speed;
+                        this.velocity_Y = Math.sin(this.radiants.center)*this.speed;
+                    }
 
-
-
+                    //4.) hit at lower center section of paddle (rebounce: -20°)
+                    if (this.position.y + this.size > player_y + 2*paddle_height/3 && this.position.y < player_y + paddle_height) {
+                        this.velocity_X = (1* Math.cos(this.angle.bottom))*this.speed;
+                        alert("Velocity X: " + this.velocity_X);
+                        this.velocity_Y = (1* Math.sin(this.angle.bottom))*this.speed;
+                        alert("Velocity Y: " + this.velocity_Y);
+                    }
+                    /*
+                    //5.) hit at bottom "border" of paddle (rebounce: -45°)
+                    else if(this.position.y == player_y + paddle_height){
+                        this.velocity_X = 1* Math.cos(this.angle.bottom)*this.speed;
+                        this.velocity_Y = 1* Math.sin(this.angle.bottom)*this.speed;
+                    }*/
+                }
             }
+            //wall
+
         }
         // ball moving to the right
-        else if(this.velocity_X > 0) {
-            if(this.position.y == ai_x){ //Ball on height paddle ai
+        else if (this.velocity_X > 0) {
+            this.position.x += this.velocity_X;
+            this.position.y += this.velocity_Y;
+            if (this.position.x == ai_x - this.size) { //Ball on height paddle ai
+                if (this.position.y + this.size > ai_y && this.position.y < ai_y + paddle_height) { // ball hits paddel
+                    this.velocity_X = -5;
 
+
+                }
 
 
             }
         }
-
 
 
         /*

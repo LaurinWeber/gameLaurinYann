@@ -16,7 +16,7 @@ export default class L_paddle_player {
         //define start position
         this.position = {
             x: 50,
-            y: game.gameHeight / 2 + this.height / 2
+            y: game.gameHeight / 2 - this.height/2
         };
     }
 
@@ -38,19 +38,18 @@ export default class L_paddle_player {
     }
 
 
-    update(deltaTime) {
+    update() {
 
         this.position.y += this.speed;
 
         //define boundary top
-        if (this.position.y < 0 - this.height) {
-            this.position.y = -this.height;
+        if (this.position.y < 0-this.height/2) {
+            this.position.y = 0-this.height/2;
         }
 
         //define boundary bottom
-        if (this.position.y + this.height > this.gameHeight + this.height) {
-            this.position.y = this.gameHeight + this.height;
+        if (this.position.y + this.height > this.gameHeight+this.height/2) {
+            this.position.y = this.gameHeight - this.height/2 ;
         }
     }
-
 }
