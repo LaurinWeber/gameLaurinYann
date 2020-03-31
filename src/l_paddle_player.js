@@ -1,4 +1,4 @@
-export default class Paddle_player {
+export default class L_paddle_player {
 
     constructor(game) {
         // get game boundaries

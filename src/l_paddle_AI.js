@@ -1,4 +1,4 @@
-export default class Paddle_AI {
+export default class L_paddle_AI {
 
     constructor(game) {
         constructor(game)

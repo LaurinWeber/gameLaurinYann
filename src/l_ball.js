@@ -1,5 +1,6 @@
 
-export default class Ball {
+
+export default class L_ball {
 
     constructor(game){
         // pass ref
@@ -19,8 +20,8 @@ export default class Ball {
         // start speed
         this.speed = 5;
         // start direction (the player starts)
-        this.velX = -5;
-        this.velY = 0;
+        this.velocity_X = -5;
+        this.velocity_Y = 0;
 
         this.angle = {top: 45, upperCenter: 20, center: 0, lowerCenter: -20, bottom: -45};
 
@@ -42,9 +43,34 @@ export default class Ball {
 
 
     update(deltaTime){
+        // position of paddels
+        //player
+        let player_x = this.game.paddle_player.position.x; //constant
+        let player_y = this.game.paddle_player.position.y;
+        // AI
+        let ai_x = this.game.paddle_AI.position.x; //constant
+        let ai_y = this.game.paddle_AI.position.y;
 
-        this.game.player.position.x;
-        // get colision
+        // size of paddle
+        let paddle_height = this.game.paddle_player.height; // constant
+        let paddle_width = this.game.paddle_player.width; // constant
+
+        // ball moving to the left
+        if(this.velocity_X < 0){
+            if(this.position.x == player_x + paddle_width){ //Ball on height of paddle player
+
+
+
+            }
+        }
+        // ball moving to the right
+        else if(this.velocity_X > 0) {
+            if(this.position.y == ai_x){ //Ball on height paddle ai
+
+
+
+            }
+        }
 
 
 

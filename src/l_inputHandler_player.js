@@ -1,4 +1,4 @@
-export default class InputHandler_player {
+export default class L_inputHandler_player {
 
     constructor(paddle_player, game) {
 
