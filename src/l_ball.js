@@ -26,7 +26,7 @@ export default class L_ball {
                         center: 0,
                         lowerCenter: -20,
                         bottom: -45};
-        this.radiants = {   top: this.angle.top*Math.PI/180,
+        this.radiant = {   top: this.angle.top*Math.PI/180,
                             upperCenter: this.angle.upperCenter*Math.PI/180,
                             center: this.angle.center*Math.PI/180,
                             lowerCenter: this.angle.lowerCenter*Math.PI/180,
@@ -50,8 +50,6 @@ export default class L_ball {
 
     //ball moves
     update() {
-
-
         // position of paddels
         //player
         let player_x = this.game.paddle_player.position.x;
@@ -71,42 +69,48 @@ export default class L_ball {
             //paddle (left)
             if (this.position.x == player_x + paddle_width) { //Ball on height of paddle player
                 if (this.position.y + this.size > player_y && this.position.y < player_y + paddle_height) { // ball hits paddle
-                    /*
                     //define hitzone
                     //1.) hit at top "border" of paddle (rebounce: 45°)
-                    if(this.position.y + this.size == player_y){
-                        this.velocity_X = 1* Math.cos(this.angle.top)*this.speed;
-                        this.velocity_Y = 1* Math.sin(this.angle.top)*this.speed;
+                    if(this.position.y + this.size > player_y && this.position.y + this.size <= player_y+20 ){
+                        // calculate velocities
+                        this.velocity_X = 1* Math.cos(this.radiant.top)*this.speed;
+                        //alert("Velocity X: " + this.velocity_X);
+                        this.velocity_Y = -1* Math.sin(this.radiant.top)*this.speed;
+                        //alert("Velocity Y: " + this.velocity_Y);
                     }
                     //2.) hit at upper center section of paddle (rebounce: 20°)
-                    else if (this.position.y + this.size > player_y && this.position.y < player_y + (paddle_height / 3)) {
-                        this.velocity_X = 1* Math.cos(this.angle.upperCenter)*this.speed;
-                        this.velocity_Y = 1* Math.sin(this.angle.upperCenter)*this.speed;
-                    }*/
+                    if (this.position.y + this.size > player_y+20 && this.position.y < player_y + (paddle_height / 3)) {
+                        // calculate velocities
+                        this.velocity_X = 1* Math.cos(this.radiant.upperCenter)*this.speed;
+                        this.velocity_Y = -1* Math.sin(this.radiant.upperCenter)*this.speed;
+                    }
                     //3.) hit at center of paddle (rebounce: 0°)
                     if (this.position.y + this.size > player_y + (paddle_height / 3) && this.position.y < player_y + (2 * paddle_height / 3)) {
-                        this.velocity_X = Math.cos(this.radiants.center)*this.speed;
-                        this.velocity_Y = Math.sin(this.radiants.center)*this.speed;
+                        // calculate velocities
+                        this.velocity_X = Math.cos(this.radiant.center)*this.speed;
+                        this.velocity_Y = Math.sin(this.radiant.center)*this.speed;
                     }
-
                     //4.) hit at lower center section of paddle (rebounce: -20°)
-                    if (this.position.y + this.size > player_y + 2*paddle_height/3 && this.position.y < player_y + paddle_height) {
-                        this.velocity_X = (1* Math.cos(this.angle.bottom))*this.speed;
-                        alert("Velocity X: " + this.velocity_X);
-                        this.velocity_Y = (1* Math.sin(this.angle.bottom))*this.speed;
-                        alert("Velocity Y: " + this.velocity_Y);
+                    if (this.position.y + this.size > player_y + 2*paddle_height/3 && this.position.y < player_y + paddle_height-20) {
+                        // calculate velocities
+                        this.velocity_X = (1* Math.cos(this.radiant.lowerCenter))*this.speed;
+                        this.velocity_Y = (-1* Math.sin(this.radiant.lowerCenter))*this.speed;
                     }
-                    /*
                     //5.) hit at bottom "border" of paddle (rebounce: -45°)
-                    else if(this.position.y == player_y + paddle_height){
-                        this.velocity_X = 1* Math.cos(this.angle.bottom)*this.speed;
-                        this.velocity_Y = 1* Math.sin(this.angle.bottom)*this.speed;
-                    }*/
+                    if(this.position.y >= player_y+paddle_height-20 && this.position.y < player_y + paddle_height){
+                        // calculate velocities
+                        this.velocity_X = 1* Math.cos(this.radiant.bottom)*this.speed;
+                        this.velocity_Y = -1* Math.sin(this.radiant.bottom)*this.speed;
+                    }
                 }
             }
-            //wall
-
+            // when ball hits the wall (top or bottom) then inverse y.position of ball
+            if(this.position.y < 0 || this.position.y+this.size > this.gameHeight){
+                this.velocity_Y = -this.velocity_Y;
+            }
         }
+
+
         // ball moving to the right
         else if (this.velocity_X > 0) {
             this.position.x += this.velocity_X;
@@ -117,8 +121,10 @@ export default class L_ball {
 
 
                 }
-
-
+            }
+            //wall
+            if(this.position.y < 0 || this.position.y+this.size > this.gameHeight){
+                this.velocity_Y = -this.velocity_Y;
             }
         }
 
