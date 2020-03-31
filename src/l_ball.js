@@ -28,6 +28,7 @@ export default class L_ball {
             lowerCenter: -20,
             bottom: -45
         };
+        // radiants needed, as Math.cos(param) takes radiants as parameters..
         this.radiant = {
             top: this.angle.top * Math.PI / 180,
             upperCenter: this.angle.upperCenter * Math.PI / 180,
@@ -35,9 +36,6 @@ export default class L_ball {
             lowerCenter: this.angle.lowerCenter * Math.PI / 180,
             bottom: this.angle.bottom * Math.PI / 180
         }
-
-        // ball launch, game (Anspiel)
-        this.launch = true;
 
         // couter for the score
         this.scorePlayer = 0;
@@ -160,15 +158,21 @@ export default class L_ball {
         }//end moving right
 
         // ------------------------------------ count the scores ------------------------------------
-        // iaScore
-        if (this.position.x == 0) {
+        // aiScore
+        if (this.position.x <= 0 ) {
             this.scoreEnemy++;
-            this.draw(this.context);
+            this.velocity_Y = 0;
+            this.velocity_X = -this.speed;
+            this.position.x = this.gameWidth / 2 + this.size/2;
+            this.position.y = this.gameHeight / 2 + this.size /2;
         }
         // playerScore
-        if (this.position.x + this.size == this.gameWidth) {
+        if (this.position.x + this.size >= this.gameWidth) {
             this.scorePlayer++;
-            this.draw(this.context);
+            this.velocity_Y = 0;
+            this.velocity_X = this.speed;
+            this.position.x = this.gameWidth / 2 + this.size/2;
+            this.position.y = this.gameHeight / 2 + this.size /2;
         }
     }// end Update
 
