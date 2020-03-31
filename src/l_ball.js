@@ -16,7 +16,8 @@ export default class L_ball {
         this.position = {x: this.gameWidth / 2, y: this.gameHeight / 2};
 
         // start speed
-        this.speed = 5;
+        this.speedStart = 5;
+        this.speed = this.speedStart; // speed during game
         // start direction (the player starts)
         this.velocity_X = -5;
         this.velocity_Y = 0;
@@ -70,6 +71,7 @@ export default class L_ball {
             //paddle (left)
             if (this.position.x < player_x + paddle_width && this.position.x > player_x) { //Ball on height of paddle player
                 if (this.position.y + this.size > player_y && this.position.y < player_y + paddle_height) { // ball hits paddle
+                    this.speed++; // everytime player hits paddle accelerating the ball
                     //define hitzone
                     //1.) hit at top "border" of paddle (rebounce: 45°)
                     if (this.position.y + this.size > player_y && this.position.y + this.size <= player_y + 20) {
@@ -161,6 +163,7 @@ export default class L_ball {
         // aiScore
         if (this.position.x <= 0 ) {
             this.scoreEnemy++;
+            this.speed = this.speedStart;
             this.velocity_Y = 0;
             this.velocity_X = -this.speed;
             this.position.x = this.gameWidth / 2 + this.size/2;
@@ -169,6 +172,7 @@ export default class L_ball {
         // playerScore
         if (this.position.x + this.size >= this.gameWidth) {
             this.scorePlayer++;
+            this.speed = this.speedStart;
             this.velocity_Y = 0;
             this.velocity_X = this.speed;
             this.position.x = this.gameWidth / 2 + this.size/2;
