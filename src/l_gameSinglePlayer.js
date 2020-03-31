@@ -1,5 +1,3 @@
-import Ball from "./l_ball.js";
-
 import L_paddle_player from "./l_paddle_player.js";
 import L_paddle_AI from "./l_paddle_AI.js";
 
