@@ -1,4 +1,4 @@
-export default class InputHandler_AI {
+export default class L_inputHandler_AI {
 
     // player on the left
     // AI on the right of the canvas

@@ -1,10 +1,11 @@
-import Ball from "./ball.js";
+import Ball from "./l_ball.js";
 
-import Paddle_player from "./paddle_player";
-import Paddle_AI from "./paddle_AI";
+import L_paddle_player from "./l_paddle_player.js";
+import L_paddle_AI from "./l_paddle_AI.js";
 
-import InputHandler_player from "./inputHandler_player";
-import InputHandler_AI from "./inputHandler_AI";
+import L_inputHandler_player from "./l_inputHandler_player.js";
+import L_inputHandler_AI from "./l_inputHandler_AI.js";
+import L_ball from "./l_ball.js";
 
 const GAMESTATE = {
     PAUSED: 0,
@@ -13,7 +14,7 @@ const GAMESTATE = {
     GAMEOVER: 3
 };
 
-export default class GameSinglePlayer {
+export default class L_gameSinglePlayer {
     constructor(gameWidth, gameHeight) {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
@@ -23,9 +24,9 @@ export default class GameSinglePlayer {
 
         this.gamestate = GAMESTATE.MENU;
 
-        this.paddle_player = new Paddle_player(this);
-        this.paddle_AI = new Paddle_AI(this)
-        this.ball = new Ball(this);
+        this.paddle_player = new L_paddle_player(this);
+        this.paddle_AI = new L_paddle_AI(this)
+        this.ball = new L_ball(this);
 
         this.gameObjects = [
             this.paddle_player,
@@ -33,17 +34,17 @@ export default class GameSinglePlayer {
             this.ball
         ];
 
-        new InputHandler_player(this.paddle_player, this);
-        new InputHandler_AI(this.paddle_AI, this);
+        new L_inputHandler_player(this.paddle_player, this);
+        new L_inputHandler_AI(this.paddle_AI, this);
 
     }
 
-    update(deltaTime){
+    update(){
         //Stop updating when paused or in Menu
         if (this.gamestate === GAMESTATE.PAUSED){
             return;
         }
-        this.gameObjects.forEach((object)=>object.update(deltaTime));
+        this.gameObjects.forEach((object)=>object.update());
     }
 
 
