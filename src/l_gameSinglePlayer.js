@@ -12,6 +12,7 @@ const GAMESTATE = {
     GAMEOVER: 3
 };
 
+
 export default class L_gameSinglePlayer {
     constructor(gameWidth, gameHeight) {
         this.gameWidth = gameWidth;
@@ -32,8 +33,8 @@ export default class L_gameSinglePlayer {
             this.ball
         ];
 
-        new L_inputHandler_player(this.paddle_player, this);
-        new L_inputHandler_AI(this.paddle_AI, this);
+        new L_inputHandler_player(this.paddle_player);
+        this.ai = new L_inputHandler_AI(this.paddle_AI, this.ball, this);
 
     }
 
@@ -42,12 +43,13 @@ export default class L_gameSinglePlayer {
         if (this.gamestate === GAMESTATE.PAUSED){
             return;
         }
+        this.ai.ai();
         this.gameObjects.forEach((object)=>object.update());
+
     }
 
 
     draw(context){
-
         this.gameObjects.forEach((object)=>object.draw(context));
 
 

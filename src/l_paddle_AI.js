@@ -23,10 +23,12 @@ export default class L_paddle_AI {
     }
 
     moveUp() {
+        this.speed = 0;
         this.speed -= this.maxSpeed;
     }
 
     moveDown() {
+        this.speed = 0; //reset speed otherwise
         this.speed += this.maxSpeed;
     }
 
@@ -51,5 +53,6 @@ export default class L_paddle_AI {
         if (this.position.y + this.height > this.gameHeight+this.height/2) {
             this.position.y = this.gameHeight - this.height/2 ;
         }
+        this.speed = 0; // set this so after one update keydown is being nutralised.. stop movement!
     }
 }
