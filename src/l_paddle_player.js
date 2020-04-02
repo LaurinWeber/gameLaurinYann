@@ -21,11 +21,11 @@ export default class L_paddle_player {
     }
 
     moveUp() {
-        this.speed -= this.maxSpeed;
+        this.speed = -this.maxSpeed;
     }
 
     moveDown() {
-        this.speed += this.maxSpeed;
+        this.speed = this.maxSpeed;
     }
 
     stop() {

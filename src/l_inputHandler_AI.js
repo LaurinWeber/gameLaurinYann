@@ -2,8 +2,6 @@ export default class L_inputHandler_AI {
 
     // player on the left
     // AI on the right of the canvas
-
-
     constructor(paddle_AI, ball, game) {
         this.game = game;
         this.paddle_AI = paddle_AI;
