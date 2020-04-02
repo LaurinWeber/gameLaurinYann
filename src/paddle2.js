@@ -3,7 +3,7 @@ export default class Paddle2 {
     constructor(game){
 
         this.gameWidth = game.gameWidth;
-        this.gameHight = game.gameHeight;
+        this.gameHeight = game.gameHeight;
 
         this.width = 30;
         this.height = 150;
@@ -42,8 +42,8 @@ export default class Paddle2 {
         this.position.y += this.speed;
 
         //define boundary Bottom
-        if (this.position.y > this.gameHight - this.height) {
-            this.position.y = this.gameHight - this.height;
+        if (this.position.y > this.gameHeight - this.height) {
+            this.position.y = this.gameHeight - this.height;
         }
 
         //define boundary Top
