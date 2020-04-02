@@ -39,8 +39,15 @@ export default class L_gameSinglePlayer {
     }
 
     update(){
+
+        //Check player score to GameOver
+
+        if (this.ball.scorePlayer === 5 ||this.ball.scoreEnemy === 5){
+            this.gamestate = GAMESTATE.GAMEOVER;
+        }
+
         //Stop updating when paused or in Menu
-        if (this.gamestate === GAMESTATE.PAUSED){
+        if (this.gamestate === GAMESTATE.PAUSED ||this.gamestate === GAMESTATE.GAMEOVER){
             return;
         }
         this.ai.ai();
@@ -64,6 +71,19 @@ export default class L_gameSinglePlayer {
             context.fillStyle = "white";
             context.textAlign = "center";
             context.fillText("Paused", this.gameWidth / 2, this.gameHeight / 2);
+        }
+
+        //Draw Game over screen
+        if (this.gamestate === GAMESTATE.GAMEOVER){
+            context.rect(0,0,this.gameWidth,this.gameHeight);
+            context.fillStyle = "#00b3b3"
+            context.fill();
+
+            //Draw "Game Over" the screen
+            context.font = "30px Arial";
+            context.fillStyle = "white";
+            context.textAlign = "center";
+            context.fillText("Game over", this.gameWidth / 2, this.gameHeight / 2);
         }
 
     }

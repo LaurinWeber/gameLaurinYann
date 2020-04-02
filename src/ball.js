@@ -40,8 +40,8 @@ export default class Ball {
         }
 
         // couter for the score
-        this.scorePlayer = 0;
-        this.scoreEnemy = 0;
+        this.scorePlayer1 = 0;
+        this.scorePlayer2 = 0;
 
     }
 
@@ -49,8 +49,8 @@ export default class Ball {
     draw(context){
         context.drawImage(this.image,this.position.x,this.position.y,this.size,this.size);
         context.font = "bold 24px Arial";
-        context.fillText(this.scorePlayer, 0, 300);
-        context.fillText(this.scoreEnemy, 785, 300);
+        context.fillText(this.scorePlayer1, 0, 300);
+        context.fillText(this.scorePlayer2, 785, 300);
     }
 
     update(deltaTime){
@@ -162,7 +162,7 @@ export default class Ball {
         // ------------------------------------ count the scores ------------------------------------
         // aiScore
         if (this.position.x <= 0 ) {
-            this.scoreEnemy++;
+            this.scorePlayer2++;
             this.speed = this.speedStart;
             this.velocity_Y = 0;
             this.velocity_X = -this.speed;
@@ -171,14 +171,13 @@ export default class Ball {
         }
         // playerScore
         if (this.position.x + this.size >= this.gameWidth) {
-            this.scorePlayer++;
+            this.scorePlayer1++;
             this.speed = this.speedStart;
             this.velocity_Y = 0;
             this.velocity_X = this.speed;
             this.position.x = this.gameWidth / 2 + this.size/2;
             this.position.y = this.gameHeight / 2 + this.size /2;
         }
-
     }
 
 }

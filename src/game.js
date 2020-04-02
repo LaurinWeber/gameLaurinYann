@@ -14,6 +14,8 @@ const GAMESTATE = {
 export default class Game {
 
 
+
+
     constructor(gameWidth, gameHeight) {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
@@ -28,14 +30,14 @@ export default class Game {
 
         this.ball = new Ball(this);
 
+        new InputHandler(this.paddle, this);
+        new InputHandler2(this.paddle2, this);
+
         this.gameObjects = [
             this.paddle,
             this.paddle2,
             this.ball
         ];
-
-        new InputHandler(this.paddle, this);
-        new InputHandler2(this.paddle2, this);
 
     }
 
@@ -43,8 +45,13 @@ export default class Game {
 
     update(deltaTime){
 
+        //Check player score to GameOver
+        if (this.ball.scorePlayer1 === 5 ||this.ball.scorePlayer2 === 5){
+            this.gamestate = GAMESTATE.GAMEOVER;
+        }
+
         //Stop updating when paused or in Menu
-        if (this.gamestate === GAMESTATE.PAUSED){
+        if (this.gamestate === GAMESTATE.PAUSED ||this.gamestate === GAMESTATE.GAMEOVER){
             return;
         }
 
@@ -71,6 +78,19 @@ export default class Game {
             context.fillText("Paused", this.gameWidth / 2, this.gameHeight / 2);
         }
 
+        //Draw Game over screen
+        if (this.gamestate === GAMESTATE.GAMEOVER){
+            context.rect(0,0,this.gameWidth,this.gameHeight);
+            context.fillStyle = "#00b3b3"
+            context.fill();
+
+            //Draw "Game Over" the screen
+            context.font = "30px Arial";
+            context.fillStyle = "white";
+            context.textAlign = "center";
+            context.fillText("Game over", this.gameWidth / 2, this.gameHeight / 2);
+        }
+
     }
 
     togglePause(){
@@ -81,5 +101,7 @@ export default class Game {
             this.gamestate = GAMESTATE.PAUSED;
         }
     }
+
+
 
 }
