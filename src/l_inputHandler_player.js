@@ -1,15 +1,15 @@
 export default class L_inputHandler_player {
 
-    constructor(l_paddle_player, game) {
+    constructor(l_paddle_player) {
 
         document.addEventListener("keydown", event => {
 
             switch (event.keyCode) {
-                case 16: // shift -> up
+                case 38: // shift -> up
                     l_paddle_player.moveUp();
                     event.preventDefault();
                     break;
-                case 17: // ctl -> down
+                case 40: // ctl -> down
                     l_paddle_player.moveDown();
                     event.preventDefault();
                     break;
@@ -24,11 +24,11 @@ export default class L_inputHandler_player {
         document.addEventListener("keyup", event => {
 
             switch (event.keyCode) {
-                case 16:
+                case 38:
                     l_paddle_player.stop();
                     event.preventDefault();
                     break;
-                case 17:
+                case 40:
                     l_paddle_player.stop();
                     event.preventDefault();
                     break;
