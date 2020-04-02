@@ -5,11 +5,11 @@ export default class InputHandler {
         document.addEventListener("keydown", event => {
 
             switch (event.keyCode) {
-                case 37:
-                    paddle.moveLeft();
+                case 16:
+                    paddle.moveUp(); //shift
                     break;
-                case 39:
-                    paddle.moveRight(); //-->
+                case 17:
+                    paddle.moveDown(); //ctrl
                     break;
                 case 27:
                     game.togglePause(); //ESC to pause the game
@@ -22,13 +22,13 @@ export default class InputHandler {
         document.addEventListener("keyup", event => {
 
             switch (event.keyCode) {
-                case 37:
+                case 16:
                     if (paddle.speed < 0) {
                         paddle.stop();
                     }
 
                     break;
-                case 39:
+                case 17:
                     if (paddle.speed > 0) {
                         paddle.stop();
                     }

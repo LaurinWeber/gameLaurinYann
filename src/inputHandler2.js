@@ -5,11 +5,11 @@ export default class InputHandler2 {
         document.addEventListener("keydown", event => {
 
             switch (event.keyCode) {
-                case 65:
-                    paddle.moveLeft();
+                case 38:
+                    paddle.moveUp();//Hoch
                     break;
-                case 68:
-                    paddle.moveRight(); //-->
+                case 40:
+                    paddle.moveDown(); //Runter
                     break;
             }
         });
@@ -19,13 +19,13 @@ export default class InputHandler2 {
         document.addEventListener("keyup", event => {
 
             switch (event.keyCode) {
-                case 65:
+                case 38:
                     if (paddle.speed < 0) {
                         paddle.stop();
                     }
 
                     break;
-                case 68:
+                case 40:
                     if (paddle.speed > 0) {
                         paddle.stop();
                     }
