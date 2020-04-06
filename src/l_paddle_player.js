@@ -21,7 +21,7 @@ export default class L_paddle_player {
     }
 
     moveUp() {
-        this.speed = -this.maxSpeed;
+        this.speed =- this.maxSpeed;
     }
 
     moveDown() {
@@ -42,14 +42,14 @@ export default class L_paddle_player {
 
         this.position.y += this.speed;
 
-        //define boundary top
-        if (this.position.y < 0-this.height/2) {
-            this.position.y = 0-this.height/2;
+        //define boundary Bottom
+        if (this.position.y > this.gameHeight - this.height) {
+            this.position.y = this.gameHeight - this.height;
         }
 
-        //define boundary bottom
-        if (this.position.y + this.height > this.gameHeight+this.height/2) {
-            this.position.y = this.gameHeight - this.height/2 ;
+        //define boundary Top
+        if (this.position.y < 1) {
+            this.position.y = 1;
         }
     }
 }

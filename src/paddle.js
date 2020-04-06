@@ -1,50 +1,53 @@
 export default class Paddle {
 
-    constructor(game){
+    constructor(game) {
 
         this.gameWidth = game.gameWidth;
+        this.gameHeight = game.gameHeight;
 
-        this.width = 150;
-        this.height = 30;
+        this.width = 30;
+        this.height = 150;
 
         this.maxSpeed = 7;
         this.speed = 0;
 
         this.position = {
-            x: game.gameWidth / 2 - this.width / 2,
-            y: game.gameHeight - this.height - 10
+            x: 50,
+            y: game.gameHeight / 2 - this.height / 2
         };
 
     }
 
-    moveLeft(){
-        this.speed =-this.maxSpeed;
+    moveUp() {
+        this.speed =- this.maxSpeed;
     }
 
-    moveRight(){
+    moveDown() {
         this.speed = this.maxSpeed;
     }
 
-    stop(){
+    stop() {
         this.speed = 0;
     }
 
-    draw(context){
+    draw(context) {
         context.fillStyle = "#ffffff"
-        context.fillRect(this.position.x,this.position.y,this.width,this.height);
+        context.fillRect(this.position.x, this.position.y, this.width, this.height);
 
     }
 
-    update(deltaTime){
+    update(deltaTime) {
 
-        this.position.x += this.speed;
+        this.position.y += this.speed;
 
-        if(this.position.x < 0){
-            this.position.x =0;
+        //define boundary Bottom
+        if (this.position.y > this.gameHeight - this.height) {
+            this.position.y = this.gameHeight - this.height;
         }
 
-        if(this.position.x + this.width > this.gameWidth){
-            this.position.x =this.gameWidth-this.width;
+        //define boundary Top
+        if (this.position.y < 1) {
+            this.position.y = 1;
         }
     }
 
