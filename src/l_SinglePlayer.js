@@ -5,8 +5,6 @@ const GAME_WIDTH = 800;
 const GAME_HEIGHT = 600;
 
 // global variables, throughout the program
-var scorePlayer = 0;
-var scoreAI = 0;
 var is_playing = true;
 
 // local variable, only within this class
@@ -16,8 +14,6 @@ let main_context;
 let background_canvas;
 let background_ctx;
 let game // create instance of SinglePlayerGame
-//??
-let lastTime = 0;
 var requestaframe;
 
 init();
