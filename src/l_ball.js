@@ -1,4 +1,8 @@
+var counter = 0;
+
 export default class L_ball {
+
+
 
     constructor(game) {
         // pass ref
@@ -6,7 +10,15 @@ export default class L_ball {
 
         // get img from the ball
         this.image = document.getElementById("img_ball");
-        this.size = 50; // define size (x = 20 & y = 20 px)
+        this.size = 30; // define size (x = 20 & y = 20 px)
+
+        this.sizes = {
+            1: 50,
+            2: 40,
+            3: 30,
+            4: 20,
+            5: 10
+        };
 
         // define boundaries for the ball, as already defined in game.js
         this.gameWidth = game.gameWidth;
@@ -72,6 +84,13 @@ export default class L_ball {
             if (this.position.x < player_x + paddle_width && this.position.x > player_x) { //Ball on height of paddle player
                 if (this.position.y + this.size > player_y && this.position.y < player_y + paddle_height) { // ball hits paddle
                     this.speed++; // everytime player hits paddle accelerating the ball
+                    if (counter == 1){
+                        counter = 0;
+                        this.size = this.sizes[(Math.floor(Math.random()*5)+1)];
+                    }
+                    else{
+                        counter++;
+                    }
                     //define hitzone
                     //1.) hit at top "border" of paddle (rebounce: 45°)
                     if (this.position.y + this.size > player_y && this.position.y + this.size <= player_y + 20) {

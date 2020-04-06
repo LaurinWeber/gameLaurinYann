@@ -18,8 +18,8 @@ export default class L_inputHandler_AI {
         let pBall = Math.round((this.ball.position.y + this.ball.size /2) /this.paddle_AI.maxSpeed)*this.paddle_AI.maxSpeed;
         let pPaddle = Math.round((this.paddle_AI.position.y+this.paddle_AI.height/2) /this.paddle_AI.maxSpeed)*this.paddle_AI.maxSpeed;
         let pCenter =  Math.round((this.game.gameHeight / 2) /this.paddle_AI.maxSpeed)*this.paddle_AI.maxSpeed;
-        console.log("pBall : " + pBall);
-        console.log("pPaddle : " + pPaddle);
+        //console.log("pBall : " + pBall);
+        //console.log("pPaddle : " + pPaddle);
 
         //this.paddle_AI.stop();// like letting go the key (keyUp)
         // 1.) if pos.Ball "X" > 0 -> move paddle to the center
