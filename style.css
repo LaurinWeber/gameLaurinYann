@@ -44,7 +44,13 @@ h1, h2 {
 }
 
 
-#img_bigger_red{
+#img_resize{
+    display: none;
+}
+#img_bunny{
+    display: none;
+}
+#img_turtle{
     display: none;
 }
 

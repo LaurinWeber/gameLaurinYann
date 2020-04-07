@@ -17,7 +17,7 @@ export default class Ball {
         this.position = {x: this.gameWidth / 2, y: this.gameHeight / 2};
 
         // start speed
-        this.speedStart = 5;
+        this.speedStart = 15;
         this.speed = this.speedStart; // speed during game
         // start direction (the player starts)
         this.velocity_X = -5;

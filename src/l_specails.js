@@ -2,7 +2,9 @@ export default class L_specials {
 
     constructor(game) {
 
-        this.img_resize_ball = document.getElementById("img_bigger_red");
+        this.img_resize = document.getElementById("img_resize");
+        this.img_bunny = document.getElementById("img_bunny");
+        this.img_turtle = document.getElementById("img_turtle");
 
         // get game boundaries
         this.gameWidth = game.gameWidth;
@@ -11,12 +13,8 @@ export default class L_specials {
 
         //define span object size
         this.size = 30 * 2;
-
         this.counter = 0;
-        this.hide = 0;
-        this.drawer = false;
-        this.spanHit = false;
-
+        this.index = 1;
         this.sizes = {
             1: 50,
             2: 40,
@@ -38,21 +36,50 @@ export default class L_specials {
 
     // after update
     draw(context) {
-        if (this.drawer) {
-            context.drawImage(this.img_resize_ball, this.position.x, this.position.y, this.size, this.size);
+        if (this.drawerBallResize) {
+            context.drawImage(this.img_resize, this.position.x, this.position.y, this.size, this.size);
             context.font = "bold 24px Arial";
-
-            /*
-            context.fillStyle = "#ffffff"
-            context.fillRect(this.position.x, this.position.y, this.size, this.size);
-             */
         }
+        if (this.drawerBallFaster) {
+            context.drawImage(this.img_bunny, this.position.x, this.position.y, this.size, this.size);
+            context.font = "bold 24px Arial";
+        }
+        if (this.drawerBallSlower) {
+            context.drawImage(this.img_turtle, this.position.x, this.position.y, this.size, this.size);
+            context.font = "bold 24px Arial";
+        }
+
     }
 
     //before draw
     update() {
+        if (this.counter === 120) {{
+        }
+        this.index = Math.floor(Math.random()*3)+1;
+        }
 
-        if (this.counter == 120 ) {
+        console.log(this.index);
+        switch (this.index) {
+            case 1:
+                this.ballResize();
+                break;
+            case 2:
+                this.ballSpeed(+1);
+                break;
+            case 3:
+                this.ballSpeed(-1);
+                break;
+            default:
+                break;
+        }
+
+        this.counter++;
+    }
+
+    ballResize() {
+        this.drawerBallFaster = false;
+        this.drawerBallSlower = false;
+        if (this.counter === 120) {
             this.rand_X = (Math.floor(Math.random() * this.posX.length)); //get random number between 1 -2
             this.rand_Y = (Math.floor(Math.random() * this.posY.length)); //get random number between 1 -3
 
@@ -60,7 +87,7 @@ export default class L_specials {
             this.position.y = (this.posY[this.rand_Y] * this.spanPos.y) - this.size / 2;
 
             this.counter = 0;
-            this.drawer = true;
+            this.drawerBallResize = true;
 
         } else {
             //check if span was hit by the ball, if so change ball size
@@ -75,9 +102,43 @@ export default class L_specials {
                 }
             }
 
-            this.spanHit = false;
-            this.counter++;
-            this.hide++;
+        }
+    }
+
+    ballSpeed(speed) {
+        this.drawerBallResize = false;
+
+        if (this.counter === 120) {
+            this.rand_Xsp = (Math.floor(Math.random() * this.posX.length)); //get random number between 1 -2
+            this.rand_Ysp = (Math.floor(Math.random() * this.posY.length)); //get random number between 1 -3
+
+            this.position.x = (this.posX[this.rand_Xsp] * this.spanPos.x) - this.size / 2;
+            this.position.y = (this.posY[this.rand_Ysp] * this.spanPos.y) - this.size / 2;
+
+            this.counter = 0;
+            if(speed >0){
+                this.drawerBallFaster = true;
+                this.drawerBallSlower = false;
+            }
+            else{
+                this.drawerBallFaster = false;
+                this.drawerBallSlower = true;
+
+            }
+
+        } else {
+            //check if span was hit by the ball, if so change ball size
+            if (this.game.ball.position.x >= this.position.x &&
+                this.game.ball.position.x <= this.position.x + this.size / 2) {
+                if (this.game.ball.position.y >= this.position.y &&
+                    this.game.ball.position.y <= this.position.y + this.size / 2) {
+                    //change position of span
+                    this.position.x = -100;
+                    this.position.y = -100;
+                    this.game.ball.speed = this.game.ball.speed + speed;
+
+                }
+            }
         }
     }
 }
