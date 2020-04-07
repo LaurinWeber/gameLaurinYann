@@ -30,12 +30,6 @@ export default class L_specials {
 
     }
 
-    draw(context){
-
-
-    }
-
-
     // after update
     draw(context) {
         if (this.drawer) {
@@ -52,15 +46,17 @@ export default class L_specials {
     //before draw
     update() {
 
-        if (this.counter == 240 || this.spanHit) {
+        if (this.counter == 120 || this.spanHit) {
             this.rand_X = (Math.floor(Math.random() * 3) + 1); //get random number between 1 -3
             this.rand_Y = (Math.floor(Math.random() * 3) + 1); //get random number between 1 -3
-            //.size = (this.sizes[(Math.floor(Math.random() * 5) + 1)])*2; //get height of ball / span *2 -> that span is easier to hit
 
-            this.position.x = this.rand_X * this.spanPos.x - this.size / 2;
-            this.position.y = this.rand_Y * this.spanPos.y - this.size / 2;
-            this.counter = 0;
-            this.drawer = true;
+            if(this.rand_X != 2){ // except center
+                this.position.x = (this.rand_X * this.spanPos.x) - this.size / 2;
+                this.position.y = (this.rand_Y * this.spanPos.y) - this.size / 2;
+                this.counter = 0;
+                this.drawer = true;
+            }
+
 
         } else {
             //check if span was hit by the ball, if so change ball size

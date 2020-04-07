@@ -1,6 +1,6 @@
 export default class L_inputHandler_player {
 
-    constructor(l_paddle_player) {
+    constructor(l_paddle_player, game) {
 
         document.addEventListener("keydown", event => {
 

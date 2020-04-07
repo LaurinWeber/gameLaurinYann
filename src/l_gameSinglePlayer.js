@@ -37,7 +37,7 @@ export default class L_gameSinglePlayer {
 
 
 
-        new L_inputHandler_player(this.paddle_player);
+        new L_inputHandler_player(this.paddle_player, this);
         this.ai = new L_inputHandler_AI(this.paddle_AI, this.ball, this);
 
     }
