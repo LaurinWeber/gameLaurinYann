@@ -22,8 +22,9 @@ export default class L_specials {
             4: 20,
             5: 10
         };
-        this.posX = [1, 3]; //except center
-        this.posY = [1, 2, 3];
+        this.posX = [1, 3]; //except center (amount of columns)
+        this.posY = [1, 2, 3, 4, 5, 6, 7, 8]; // amount of rows can be adjusted as ..100
+        this.time = 150; //can be adjusted = "time" that the special effect stays on screen
 
         //total of 9 different positions
         this.spanPos = {
@@ -52,12 +53,9 @@ export default class L_specials {
 
     //before draw
     update() {
-        if (this.counter === 120) {{
+        if (this.counter === this.time) {
+            this.index = Math.floor(Math.random() * 3) + 1;
         }
-        this.index = Math.floor(Math.random()*3)+1;
-        }
-
-        console.log(this.index);
         switch (this.index) {
             case 1:
                 this.ballResize();
@@ -78,7 +76,7 @@ export default class L_specials {
     ballResize() {
         this.drawerBallFaster = false;
         this.drawerBallSlower = false;
-        if (this.counter === 120) {
+        if (this.counter === this.time) {
             this.rand_X = (Math.floor(Math.random() * this.posX.length)); //get random number between 1 -2
             this.rand_Y = (Math.floor(Math.random() * this.posY.length)); //get random number between 1 -3
 
@@ -107,7 +105,7 @@ export default class L_specials {
     ballSpeed(speed) {
         this.drawerBallResize = false;
 
-        if (this.counter === 120) {
+        if (this.counter === this.time) {
             this.rand_Xsp = (Math.floor(Math.random() * this.posX.length)); //get random number between 1 -2
             this.rand_Ysp = (Math.floor(Math.random() * this.posY.length)); //get random number between 1 -3
 
@@ -115,11 +113,10 @@ export default class L_specials {
             this.position.y = (this.posY[this.rand_Ysp] * this.spanPos.y) - this.size / 2;
 
             this.counter = 0;
-            if(speed >0){
+            if (speed > 0) {
                 this.drawerBallFaster = true;
                 this.drawerBallSlower = false;
-            }
-            else{
+            } else {
                 this.drawerBallFaster = false;
                 this.drawerBallSlower = true;
 
