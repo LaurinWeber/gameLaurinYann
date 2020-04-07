@@ -1,5 +1,6 @@
 import Paddle from "./paddle.js";
 import Paddle2 from "./paddle2.js";
+import SpecialPaddle from "./special_paddle.js";
 import Ball from "./ball.js";
 import InputHandler from "./inputHandler.js";
 import InputHandler2 from "./inputHandler2.js";
@@ -26,7 +27,9 @@ export default class Game {
         this.gamestate = GAMESTATE.MENU;
 
         this.paddle = new Paddle(this);
-        this.paddle2 = new Paddle2(this)
+        this.paddle2 = new Paddle2(this);
+
+        this.specialPaddle = new SpecialPaddle(this);
 
         this.ball = new Ball(this);
 
@@ -36,6 +39,7 @@ export default class Game {
         this.gameObjects = [
             this.paddle,
             this.paddle2,
+            this.specialPaddle,
             this.ball
         ];
 

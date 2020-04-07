@@ -44,6 +44,14 @@ h1, h2 {
 }
 
 
+#img_bigger_paddle{
+    display: none;
+}
+
+#img_smaller_paddle{
+    display: none;
+}
+
 #img_resize{
     display: none;
 }
