@@ -31,7 +31,6 @@ export default class L_specials {
             y: 1 * this.gameHeight / (this.posY.length + 1)
         }; // first position in top left corner, (x*2, y*2) -> center.
         this.position = {x: 20, y: 20};
-
     }
 
     // after update

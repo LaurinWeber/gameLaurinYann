@@ -4,7 +4,7 @@ import L_paddle_AI from "./l_paddle_AI.js";
 import L_inputHandler_player from "./l_inputHandler_player.js";
 import L_inputHandler_AI from "./l_inputHandler_AI.js";
 import L_ball from "./l_ball.js";
-import L_specials from "./l_specails.js";
+import L_specials from "./l_specails_ball.js";
 
 const GAMESTATE = {
     PAUSED: 0,
