@@ -31,8 +31,8 @@ export default class L_gameSinglePlayer {
         this.gameObjects = [
             this.paddle_player,
             this.paddle_AI,
-            this.ball,
-            this.specials
+            this.specials,
+            this.ball
         ];
 
 
