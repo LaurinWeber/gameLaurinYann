@@ -4,7 +4,8 @@ import L_paddle_AI from "./l_paddle_AI.js";
 import L_inputHandler_player from "./l_inputHandler_player.js";
 import L_inputHandler_AI from "./l_inputHandler_AI.js";
 import L_ball from "./l_ball.js";
-import L_specials from "./l_specails_ball.js";
+import L_specials_ball from "./l_specails_ball.js";
+import L_specials_wall from "./l_specails_wall.js";
 
 const GAMESTATE = {
     PAUSED: 0,
@@ -27,11 +28,13 @@ export default class L_gameSinglePlayer {
         this.paddle_player = new L_paddle_player(this);
         this.paddle_AI = new L_paddle_AI(this)
         this.ball = new L_ball(this);
-        this.specials = new L_specials(this);
+        this.specials_ball = new L_specials_ball(this);
+        this.specials_wall = new L_specials_wall(this);
         this.gameObjects = [
             this.paddle_player,
             this.paddle_AI,
-            this.specials,
+            this.specials_ball,
+            this.specials_wall,
             this.ball
         ];
 

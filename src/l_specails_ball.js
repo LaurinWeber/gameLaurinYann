@@ -1,4 +1,4 @@
-export default class L_specials {
+export default class L_specials_ball {
 
     constructor(game) {
 
@@ -12,7 +12,7 @@ export default class L_specials {
         this.game = game;
 
         //define span object size
-        this.size = 30 * 2;
+        this.size = 80;
         this.counter = 0;
         this.index = 1;
         this.sizes = {
