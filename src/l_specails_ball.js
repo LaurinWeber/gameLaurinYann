@@ -131,8 +131,12 @@ export default class L_specials_ball {
                     //change position of span
                     this.position.x = -100;
                     this.position.y = -100;
-                    this.game.ball.speed = this.game.ball.speed + speed;
-
+                    if(speed > 0){
+                        this.game.ball.speed = this.game.ball.speed + speed;
+                    }
+                    else{
+                        this.game.ball.speed = this.game.ball.speedStart;
+                    }
                 }
             }
         }
