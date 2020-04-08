@@ -22,7 +22,7 @@ export default class SpecialPaddle {
             5: 10
         };
         this.posX = [1, 3]; //except center (amount of columns)
-        this.posY = [1, 2, 3, 4, 5, 6, 7, 8]; // amount of rows can be adjusted as ..100
+        this.posY = [1, 2, 3]; // amount of rows can be adjusted as ..100
         this.time = 150; //can be adjusted = "time" that the special effect stays on screen
 
         //total of 9 different positions
@@ -83,9 +83,9 @@ export default class SpecialPaddle {
             console.log("Position " +this.game.ball.position.x);
             //check if span was hit by the ball, if so change paddle size
             if (this.game.ball.position.x >= this.position.x &&
-                this.game.ball.position.x <= this.position.x + this.size / 2) {
+                this.game.ball.position.x <= this.position.x + this.size) {
                 if (this.game.ball.position.y >= this.position.y &&
-                    this.game.ball.position.y <= this.position.y + this.size / 2) {
+                    this.game.ball.position.y <= this.position.y + this.size) {
                     //change position of span
                     this.position.x = -100;
                     this.position.y = -100;
@@ -113,9 +113,9 @@ export default class SpecialPaddle {
         } else {
             //check if span was hit by the ball, if so change paddle size
             if (this.game.ball.position.x >= this.position.x &&
-                this.game.ball.position.x <= this.position.x + this.size / 2) {
+                this.game.ball.position.x <= this.position.x + this.size) {
                 if (this.game.ball.position.y >= this.position.y &&
-                    this.game.ball.position.y <= this.position.y + this.size / 2) {
+                    this.game.ball.position.y <= this.position.y + this.size) {
                     //change position of span
                     this.position.x = -100;
                     this.position.y = -100;
