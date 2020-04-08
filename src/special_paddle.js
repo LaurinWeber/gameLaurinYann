@@ -4,6 +4,8 @@ export default class SpecialPaddle {
 
         this.img_paddle_smaller = document.getElementById("img_smaller_paddle");
         this.img_paddle_bigger = document.getElementById("img_bigger_paddle");
+        this.img_paddle_faster = document.getElementById("img_faster_paddle");
+        this.img_paddle_slower = document.getElementById("img_slower_paddle");
 
         // get game boundaries
         this.gameWidth = game.gameWidth;
@@ -36,12 +38,19 @@ export default class SpecialPaddle {
     // after update
     draw(context) {
         if (this.drawerPaddleSmaller) {
-            console.log("Alert")
             context.drawImage(this.img_paddle_smaller, this.position.x, this.position.y, this.size, this.size);
             context.font = "bold 24px Arial";
         }
         if (this.drawerPaddleBigger) {
             context.drawImage(this.img_paddle_bigger, this.position.x, this.position.y, this.size, this.size);
+            context.font = "bold 24px Arial";
+        }
+        if (this.drawerPaddleFaster) {
+            context.drawImage(this.img_paddle_faster, this.position.x, this.position.y, this.size, this.size);
+            context.font = "bold 24px Arial";
+        }
+        if (this.drawerPaddleSlower) {
+            context.drawImage(this.img_paddle_slower, this.position.x, this.position.y, this.size, this.size);
             context.font = "bold 24px Arial";
         }
 
@@ -50,7 +59,7 @@ export default class SpecialPaddle {
     //before draw
     update() {
         if (this.counter === this.time) {
-            this.index = Math.floor(Math.random() * 2) + 1; //problem as you took factor *3 -> out of bounce so default was called that did nothing, and also the color of the arrows were black
+            this.index = Math.floor(Math.random() * 4) + 1; //problem as you took factor *3 -> out of bounce so default was called that did nothing, and also the color of the arrows were black
         }
 
         switch (this.index) {
@@ -59,6 +68,12 @@ export default class SpecialPaddle {
                 break;
             case 2:
                 this.paddleBigger();
+                break;
+            case 3:
+                this.paddleFaster();
+                break;
+            case 4:
+                this.paddleSlower();
                 break;
             default:
                 break;
@@ -90,11 +105,14 @@ export default class SpecialPaddle {
                     this.position.x = -100;
                     this.position.y = -100;
                     //Change paddle size smaller
-                    this.game.paddle.height = 100;
-                    this.game.paddle2.height = 100;
+                    if (this.game.ball.velocity_X > 0) { //Ball moving to right
+                        this.game.paddle2.height = 100; //Make paddle2 smaller
+                    }
+                    else if(this.game.ball.velocity_X < 0){ //Ball moving to left
+                        this.game.paddle.height = 100; //Make paddle1 smaller
+                    }
                 }
             }
-
         }
     }
 
@@ -119,8 +137,82 @@ export default class SpecialPaddle {
                     //change position of span
                     this.position.x = -100;
                     this.position.y = -100;
-                    this.game.paddle.height = 200;
-                    this.game.paddle2.height = 200;
+                    if (this.game.ball.velocity_X > 0) {//Ball moving to right
+                        this.game.paddle.height = 200; //Make paddle1 bigger
+                    }
+                    else if(this.game.ball.velocity_X < 0){//Ball moving to left
+                        this.game.paddle2.height = 200; //Make paddle2 bigger
+                    }
+                }
+            }
+
+        }
+    }
+
+    paddleFaster() {
+        this.drawerPaddleSmaller = false;
+        this.drawerPaddleBigger = false;
+        this.drawerPaddleSlower = false;
+        if (this.counter === this.time) {
+            this.rand_X = (Math.floor(Math.random() * this.posX.length)); //get random number between 1 -2
+            this.rand_Y = (Math.floor(Math.random() * this.posY.length)); //get random number between 1 -3
+
+            this.position.x = (this.posX[this.rand_X] * this.spanPos.x) - this.size / 2;
+            this.position.y = (this.posY[this.rand_Y] * this.spanPos.y) - this.size / 2;
+
+            this.counter = 0;
+            this.drawerPaddleFaster = true;
+
+        } else {
+            //check if span was hit by the ball, if so change paddle size
+            if (this.game.ball.position.x >= this.position.x &&
+                this.game.ball.position.x <= this.position.x + this.size) {
+                if (this.game.ball.position.y >= this.position.y &&
+                    this.game.ball.position.y <= this.position.y + this.size) {
+                    //change position of span
+                    this.position.x = -100;
+                    this.position.y = -100;
+                    if (this.game.ball.velocity_X > 0) {//Ball moving to right
+                        this.game.paddle.maxSpeed = 10; //Make paddle1 faster
+                    }
+                    else if(this.game.ball.velocity_X < 0){//Ball moving to left
+                        this.game.paddle2.maxSpeed = 10; //Make paddle2 faster
+                    }
+                }
+            }
+
+        }
+    }
+
+    paddleSlower() {
+        this.drawerPaddleSmaller = false;
+        this.drawerPaddleBigger = false;
+        this.drawerPaddleFaster= false;
+        if (this.counter === this.time) {
+            this.rand_X = (Math.floor(Math.random() * this.posX.length)); //get random number between 1 -2
+            this.rand_Y = (Math.floor(Math.random() * this.posY.length)); //get random number between 1 -3
+
+            this.position.x = (this.posX[this.rand_X] * this.spanPos.x) - this.size / 2;
+            this.position.y = (this.posY[this.rand_Y] * this.spanPos.y) - this.size / 2;
+
+            this.counter = 0;
+            this.drawerPaddleSlower = true;
+
+        } else {
+            //check if span was hit by the ball, if so change paddle size
+            if (this.game.ball.position.x >= this.position.x &&
+                this.game.ball.position.x <= this.position.x + this.size) {
+                if (this.game.ball.position.y >= this.position.y &&
+                    this.game.ball.position.y <= this.position.y + this.size) {
+                    //change position of span
+                    this.position.x = -100;
+                    this.position.y = -100;
+                    if (this.game.ball.velocity_X > 0) {//Ball moving to right
+                        this.game.paddle2.maxSpeed = 3; //Make paddle1 slower
+                    }
+                    else if(this.game.ball.velocity_X < 0){//Ball moving to left
+                        this.game.paddle.maxSpeed= 3; //Make paddle2 slower
+                    }
                 }
             }
 

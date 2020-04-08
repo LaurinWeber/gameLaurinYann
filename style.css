@@ -52,6 +52,14 @@ h1, h2 {
     display: none;
 }
 
+#img_faster_paddle{
+    display: none;
+}
+
+#img_slower_paddle{
+    display: none;
+}
+
 #img_resize{
     display: none;
 }
