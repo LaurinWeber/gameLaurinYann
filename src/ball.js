@@ -1,10 +1,8 @@
-
 export default class Ball {
 
     constructor(game){
 
         this.game = game;
-
         // get img from the ball
         this.image = document.getElementById("img_ball");
         this.size = 20; // define size (x = 20 & y = 20 px)

@@ -80,7 +80,8 @@ export default class SpecialPaddle {
             this.drawerPaddleSmaller = true;
 
         } else {
-            //check if span was hit by the ball, if so change ball size
+            console.log("Position " +this.game.ball.position.x);
+            //check if span was hit by the ball, if so change paddle size
             if (this.game.ball.position.x >= this.position.x &&
                 this.game.ball.position.x <= this.position.x + this.size / 2) {
                 if (this.game.ball.position.y >= this.position.y &&
@@ -90,6 +91,7 @@ export default class SpecialPaddle {
                     this.position.y = -100;
                     //Change paddle size smaller
                     this.game.paddle.height = 100;
+                    this.game.paddle2.height = 100;
                 }
             }
 
@@ -109,7 +111,7 @@ export default class SpecialPaddle {
             this.drawerPaddleBigger = true;
 
         } else {
-            //check if span was hit by the ball, if so change ball size
+            //check if span was hit by the ball, if so change paddle size
             if (this.game.ball.position.x >= this.position.x &&
                 this.game.ball.position.x <= this.position.x + this.size / 2) {
                 if (this.game.ball.position.y >= this.position.y &&
@@ -118,6 +120,7 @@ export default class SpecialPaddle {
                     this.position.x = -100;
                     this.position.y = -100;
                     this.game.paddle.height = 200;
+                    this.game.paddle2.height = 200;
                 }
             }
 
