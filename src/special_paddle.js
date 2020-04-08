@@ -36,6 +36,7 @@ export default class SpecialPaddle {
     // after update
     draw(context) {
         if (this.drawerPaddleSmaller) {
+            console.log("Alert")
             context.drawImage(this.img_paddle_smaller, this.position.x, this.position.y, this.size, this.size);
             context.font = "bold 24px Arial";
         }
@@ -49,8 +50,9 @@ export default class SpecialPaddle {
     //before draw
     update() {
         if (this.counter === this.time) {
-            this.index = Math.floor(Math.random() * 3) + 1;
+            this.index = Math.floor(Math.random() * 2) + 1; //problem as you took factor *3 -> out of bounce so default was called that did nothing, and also the color of the arrows were black
         }
+
         switch (this.index) {
             case 1:
                 this.paddleSmaller();
