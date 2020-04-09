@@ -63,6 +63,12 @@ h1, h2 {
 #img_resize{
     display: none;
 }
+#img_plus{
+    display: none;
+}
+#img_minus{
+    display: none;
+}
 #img_bunny{
     display: none;
 }
@@ -70,6 +76,10 @@ h1, h2 {
     display: none;
 }
 #img_wall{
+    display: none;
+}
+
+#img_moving{
     display: none;
 }
 /*===================== Laurin =====================*/

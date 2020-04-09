@@ -1,11 +1,12 @@
-import L_paddle_player from "./l_paddle_player.js";
-import L_paddle_AI from "./l_paddle_AI.js";
+import L_paddle_player from "./player/l_paddle_player.js";
+import L_paddle_AI from "./ai/l_paddle_AI.js";
 
-import L_inputHandler_player from "./l_inputHandler_player.js";
-import L_inputHandler_AI from "./l_inputHandler_AI.js";
+import L_inputHandler_player from "./player/l_inputHandler_player.js";
+import L_inputHandler_AI from "./ai/l_inputHandler_AI.js";
 import L_ball from "./l_ball.js";
-import L_specials_ball from "./l_specails_ball.js";
-import L_specials_wall from "./l_specails_wall.js";
+import L_special_ball from "./level/special/l_specail_ball.js";
+import L_special_wall from "./level/special/l_specail_wall.js";
+import {L_level} from "./level/l_level.js";
 
 const GAMESTATE = {
     PAUSED: 0,
@@ -28,13 +29,15 @@ export default class L_gameSinglePlayer {
         this.paddle_player = new L_paddle_player(this);
         this.paddle_AI = new L_paddle_AI(this)
         this.ball = new L_ball(this);
-        this.specials_ball = new L_specials_ball(this);
-        this.specials_wall = new L_specials_wall(this);
+        this.level = new L_level(this);
+        //this.specials_ball = new L_special_ball(this);
+        //this.specials_wall = new L_special_wall(this);
         this.gameObjects = [
             this.paddle_player,
             this.paddle_AI,
-            this.specials_ball,
-            this.specials_wall,
+            this.level,
+            //this.specials_ball,
+            //this.specials_wall,
             this.ball
         ];
 
@@ -48,8 +51,7 @@ export default class L_gameSinglePlayer {
     update(){
 
         //Check player score to GameOver
-
-        if (this.ball.scorePlayer === 5 ||this.ball.scoreEnemy === 5){
+        if (this.ball.scorePlayer === 15 ||this.ball.scoreEnemy === 15){
             this.gamestate = GAMESTATE.GAMEOVER;
         }
 

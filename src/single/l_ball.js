@@ -132,7 +132,7 @@ export default class L_ball {
         // paddle (right)
         if (this.position.x < ai_x + ai_width + this.size && this.position.x > ai_x - this.size) { //Ball on height paddle ai
             if (this.position.y - this.size/2 > ai_y && this.position.y < ai_y + ai_height) { // ball hits paddel
-                this.speed++; // everytime ai hits paddle accelerating the ball
+                //this.speed++; // everytime ai hits paddle accelerating the ball
                 //define hitzone
                 //1.) hit at top "border" of paddle (rebounce: 45°) = 10% of paddle height
                 if (this.position.y + this.size/2 > ai_y && this.position.y + this.size <= ai_y + ai_height*.1) {
