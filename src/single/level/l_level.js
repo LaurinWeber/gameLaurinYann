@@ -9,12 +9,13 @@ export class L_level {
         this.game = game
         this.i = 0;
 
-        this.level = [new l_specail_nothing(game), new l_specail_ball(game), new l_specail_wall(game), new l_special_paddle];
+        this.level = [new l_specail_nothing(game), new l_specail_ball(game), new l_specail_wall(game), new l_special_paddle(game)];
+        this.run = {nothing: false, ball: false, wall : false,paddle:false };
     }
 
     // after update
     draw(context) {
-        this.level[this.i].draw(context);
+        this.level[2].draw(context);
     }
 
     //before draw

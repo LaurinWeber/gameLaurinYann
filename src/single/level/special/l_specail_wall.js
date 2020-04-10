@@ -1,9 +1,11 @@
+import l_wall from "../../l_wall.js";
+
 export default class L_special_wall {
 
     constructor(game) {
 
         this.img_wall = document.getElementById("img_wall");
-        this.img_wall = document.getElementById("img_moving");
+        this.img_moving = document.getElementById("img_moving");
 
         // get game boundaries
         this.gameWidth = game.gameWidth;
@@ -11,8 +13,8 @@ export default class L_special_wall {
         this.game = game;
 
         //define Paddle size
-        this.width = 30;
-        this.height = 100;
+        this.size = 80;
+        this.move = false;
 
         this.counter = 0;
 
@@ -26,48 +28,55 @@ export default class L_special_wall {
 
         //total of 9 different positions
         this.spanPos = {
-            x: 1 * this.gameWidth / (this.posX.length + 2),
+            x: 1 * this.gameWidth / (8),
             y: 1 * this.gameHeight / (this.posY.length + 1)
         }; // first position in top left corner, (x*2, y*2) -> center.
 
-        this.position = {x: 20, y: 20};
-
-        /*//define start position
-        this.position = {
-            x: this.gameWidth / 2 - this.width / 2,
-            y: 0
-        };*/
+        this.position = {x: -100, y: -100};
+        this.static = new l_wall(this.game, -100, -100, false);
     }
 
     // after update
     draw(context) {
-        if(this.drawerWallStatic){
-            context.drawImage(this.img_wall, this.position.x, this.position.y, this.width, this.height);
+        if (this.drawerWallStatic) {
+            context.drawImage(this.img_wall, this.position.x, this.position.y, this.size, this.size);
             context.font = "bold 24px Arial";
+            this.static.draw(context);
         }
-        if(this.drawerWallMoving){
-            context.drawImage(this.img_wall, this.position.x, this.position.y, this.width, this.height);
+        if (this.drawerWallMoving) {
+            context.drawImage(this.img_moving, this.position.x, this.position.y, this.size, this.size);
             context.font = "bold 24px Arial";
+            this.static.draw(context);
         }
     }
 
     //before draw
     update() {
-        //reset
-        this.drawerWallStatic = false;
-        this.drawerWallMoving = false;
-        this.index = 2;
+        if (this.counter === this.time) {
+            // chose new icon to appear
+            this.index = Math.floor(Math.random() * 2) + 1;
+        }
+
+        //this.index = 1;
         switch (this.index) {
             case 1:
-                this.wallStatic();
+                this.drawerWallMoving = false;
                 this.drawerWallStatic = true;
+                this.wallStatic();
+                this.static.update();
                 break;
             case 2:
-                this.wallMoving();
+                this.drawerWallStatic = false;
                 this.drawerWallMoving = true;
+                this.wallMoving();
+
                 break;
             default:
                 break;
+        }
+        if(this.move){
+            this.static.wallMoving();
+            this.static.update();
         }
         this.counter++;
     }
@@ -98,43 +107,34 @@ export default class L_special_wall {
         this.position.x = -100;
         this.position.y = -100;
     }
-    wallIcon() {
+
+    wallStatic() {
+        if (this.counter === this.time) {
+            this.positionIcon();
+        } else if (this.hit()) {
+            this.static.position.x = this.position.x;
+            this.static.position.y = this.position.y;
+            this.resetPos();
+        }
+    }
+
+    wallMoving() {
         if (this.counter === this.time) {
             this.positionIcon();
         } else if (this.hit()) {
             this.resetPos();
-            for (var i = 0; i < this.sizes.length; i++) {
-                if (this.game.ball.size == this.sizes[i]) {
-                    this.game.ball.size = this.sizes[i-1];
-                    return;
-                }
+            this.static.speed = this.static.maxSpeed;
+            this.static.wallMoving();// up and down on Y axis
+            if(!this.move){
+               this.move = true
+            }
+            else{
+                this.move = false;
             }
         }
+
     }
 
-    wallStatic() {
-        this.position.y = this.position.y;
-        this.position.x = this.position.x;
-    }
-
-    //up and down
-    wallMoving() {
-        if (this.game.ball.position.x < this.position.x + this.width + this.game.ball.size && this.game.ball.position.x > this.position.x - this.game.ball.size) { //Ball on height of wall
-            if (this.game.ball.position.y - this.game.ball.size > this.position.y && this.game.ball.position.y < this.position.y + this.height) { // ball hits wall
-                this.game.ball.velocity_X = -this.game.ball.velocity_X;
-            }
-        }
-        //define boundary Bottom
-        if (this.position.y > this.gameHeight - this.height && this.speed > 0) {
-            this.speed = -this.maxSpeed;
-        }
-
-        //define boundary Top
-        if (this.position.y < 1 && this.speed <= 0) {
-            this.speed = this.maxSpeed;
-        }
-        this.position.y += this.speed;
-    }
-
+    //if ball hits the wall rebounce, -velocityX
 
 }
