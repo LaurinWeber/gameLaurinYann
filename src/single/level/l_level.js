@@ -8,14 +8,18 @@ export class L_level {
     constructor(game) {
         this.game = game
         this.i = 0;
-        this.currentScoreE = 0;
-        this.currentScoreP = 0;
+        this.life_Enemy = 3;
+        this.life_Player = 3;
         this.level = [new l_specail_nothing(game), new l_specail_ball(game), new l_specail_wall(game), new l_special_paddle(game)];
     }
 
     // after update
     draw(context) {
+        // draw hearts <3 to show # life left
+        context.fillText(this.life_Player, this.game.gameWidth / 2 - 200, 50);
+        context.fillText(this.life_Enemy, this.game.gameWidth / 2 + 200, 50);
         this.level[this.i].draw(context);
+
     }
 
     //before draw
@@ -25,29 +29,32 @@ export class L_level {
     }
 
     levels() {
-        if(this.currentScoreE != this.game.ball.scoreEnemy){
-            if (this.game.ball.scoreEnemy==3) {
-                //level up
-                this.i++;
-                if(this.i == this.level.length){
-                    this.i=0;
-                }
-                //this.currentScoreE = this.game.ball.scoreEnemy;
-                this.game.ball.scoreEnemy = 0;
-                this.game.ball.scorePlayer = 0;
+        if (this.game.ball.scoreEnemy == 3) {
+            //level up
+            this.i++;
+            if (this.i == this.level.length) {
+                this.i = 0;
             }
+            this.life_Player--;
+            if (this.life_Player == 0) {
+                this.game.gamestate = 3;
+            }
+            this.game.ball.scoreEnemy = 0;
+            this.game.ball.scorePlayer = 0;
         }
-        if(this.currentScoreP != this.game.ball.scorePlayer){
-            if (this.game.ball.scoreEnemy==3) {
-                //level up
-                this.i++;
-                if(this.i == this.level.length){
-                    this.i=0;
-                }
-                //this.currentScoreP = this.game.ball.scorePlayer;
-                this.game.ball.scoreEnemy = 0;
-                this.game.ball.scorePlayer = 0;
+
+        if (this.game.ball.scorePlayer == 3) {
+            //level up
+            this.i++;
+            if (this.i == this.level.length) {
+                this.i = 0;
             }
+            this.life_Enemy--;
+            if (this.life_Enemy == 0) {
+                this.game.gamestate = 3;
+            }
+            this.game.ball.scoreEnemy = 0;
+            this.game.ball.scorePlayer = 0;
         }
     }
 }

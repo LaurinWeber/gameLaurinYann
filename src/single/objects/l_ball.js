@@ -44,7 +44,7 @@ export default class L_ball {
         // couter for the score
         this.scorePlayer = 0;
         this.scoreEnemy = 0;
-    }
+           }
 
     // draw ball and score
     draw(context) {
@@ -52,6 +52,8 @@ export default class L_ball {
         context.font = "bold 24px Arial";
         context.fillText(this.scorePlayer, 5, 300);
         context.fillText(this.scoreEnemy, 785, 300);
+
+
     }
 
     //ball moves
@@ -138,7 +140,7 @@ export default class L_ball {
         // paddle (right)
         if (this.position.x + this.size > ai_x && this.position.x + this.size < ai_x + ai_width) { //Ball on height paddle ai
             if (this.position.y + this.size > ai_y && this.position.y < ai_y + ai_height) { // ball hits paddel
-                //this.speed++; // everytime ai hits paddle accelerating the ball
+                this.speed++; // everytime ai hits paddle accelerating the ball
                 //define hitzone
                 //1.) hit at top "border" of paddle (rebounce: 45°)
                 if (this.position.y + this.size > ai_y && this.position.y + this.size / 2 <= ai_y + ai_height * .05) { //5% of paddle height = hitzone 45°
