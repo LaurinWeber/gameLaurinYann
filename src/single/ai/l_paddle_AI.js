@@ -11,7 +11,7 @@ export default class L_paddle_AI {
         this.height = 150;
 
         //define paddle speed
-        this.maxSpeed = 7; //in game
+        this.maxSpeed = 5; //in game
         this.speed = 0; //at pause, start
 
         //define start position

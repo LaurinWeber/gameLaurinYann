@@ -4,7 +4,7 @@ export default class L_special_wall {
 
     constructor(game) {
 
-        this.img_wall = document.getElementById("img_wall");
+        this.img_wall = document.getElementById("img_wall_stat");
         this.img_moving = document.getElementById("img_moving");
 
         // get game boundaries
@@ -17,6 +17,7 @@ export default class L_special_wall {
         this.move = false;
 
         this.counter = 0;
+        this.first = true;
 
         //define wall speed when moving
         this.speed = 0; //at pause, start
@@ -39,7 +40,7 @@ export default class L_special_wall {
     // after update
     draw(context) {
         if (this.drawerWallStatic) {
-            context.drawImage(this.img_wall, this.position.x, this.position.y, this.size, this.size);
+            context.drawImage(this.img_wall, this.position.x, this.position.y, this.static.width, this.static.height);
             context.font = "bold 24px Arial";
             this.static.draw(context);
         }
@@ -52,9 +53,14 @@ export default class L_special_wall {
 
     //before draw
     update() {
+        this.wallRebounce();
+
         if (this.counter === this.time) {
             // chose new icon to appear
             this.index = Math.floor(Math.random() * 2) + 1;
+            if(this.first){
+                this.index=1;
+            }
         }
 
         //this.index = 1;
@@ -115,6 +121,7 @@ export default class L_special_wall {
             this.static.position.x = this.position.x;
             this.static.position.y = this.position.y;
             this.resetPos();
+            this.first = false;
         }
     }
 
@@ -132,9 +139,27 @@ export default class L_special_wall {
                 this.move = false;
             }
         }
-
     }
 
-    //if ball hits the wall rebounce, -velocityX
+    wallRebounce(){
+        if(this.game.ball.velocity_X > 0){ //moving right
+            if(this.game.ball.position.x + this.game.ball.size > this.static.position.x &&
+            this.game.ball.position.x + this.game.ball.size < this.static.position.x+this.static.width){ // on height of paddle x -axe
+                if(this.game.ball.position.y + this.game.ball.size > this.static.position.y && this.game.ball.position.y < this.static.position.y + this.static.height){
+                    this.game.ball.velocity_X = -this.game.ball.velocity_X;
+                }
+
+            }
+        }
+        if(this.game.ball.velocity_X < 0){ //moving left
+            if(this.game.ball.position.x > this.static.position.x &&
+            this.game.ball.position.x < this.static.position.x + this.static.width){
+                if(this.game.ball.position.y + this.game.ball.size > this.static.position.y
+                && this.game.ball.position.y < this.static.position.y + this.static.height){
+                    this.game.ball.velocity_X = -this.game.ball.velocity_X;
+                }
+            }
+        }
+    }
 
 }

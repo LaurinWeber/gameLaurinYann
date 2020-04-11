@@ -11,8 +11,8 @@ export default class L_inputHandler_AI {
     }//end constructor
 
     ai() {
-        this.min = 0.4;
-        this.max = .8
+        this.min = .9;
+        this.max = .95
 
         //console.log(this.paddle_AI.speed)
         let pBall = Math.round((this.ball.position.y + this.ball.size /2) /this.paddle_AI.maxSpeed)*this.paddle_AI.maxSpeed;

@@ -82,6 +82,10 @@ h1, h2 {
 #img_moving{
     display: none;
 }
+
+#img_wall_stat{
+    display: none;
+}
 /*===================== Laurin =====================*/
 #main_canvas {
     border: 1px solid black;
