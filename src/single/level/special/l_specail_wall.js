@@ -1,4 +1,4 @@
-import l_wall from "../../l_wall.js";
+import l_wall from "../../objects/l_wall.js";
 
 export default class L_special_wall {
 
@@ -24,7 +24,7 @@ export default class L_special_wall {
         this.maxSpeed = 2;
 
         this.posX = [3, 5]; //except center (amount of columns)
-        this.posY = [1, 2, 3]; // amount of rows can be adjusted as ..100
+        this.posY = [1, 2, 3, 4,5,6,7,8,9,10,11,12]; // amount of rows can be adjusted as ..100
         this.time = 300; //can be adjusted = "time" that the special effect stays on screen
 
         //total of 9 different positions
@@ -34,26 +34,26 @@ export default class L_special_wall {
         }; // first position in top left corner, (x*2, y*2) -> center.
 
         this.position = {x: -100, y: -100};
-        this.static = new l_wall(this.game, -100, -100, false);
+        //this.static = new l_wall(this.game, -100, -100, false);
     }
 
     // after update
     draw(context) {
         if (this.drawerWallStatic) {
-            context.drawImage(this.img_wall, this.position.x, this.position.y, this.static.width, this.static.height);
+            context.drawImage(this.img_wall, this.position.x, this.position.y, this.game.wall.width, this.game.wall.height);
             context.font = "bold 24px Arial";
-            this.static.draw(context);
+            //this.static.draw(context);
         }
         if (this.drawerWallMoving) {
             context.drawImage(this.img_moving, this.position.x, this.position.y, this.size, this.size);
             context.font = "bold 24px Arial";
-            this.static.draw(context);
+            //this.static.draw(context);
         }
     }
 
     //before draw
     update() {
-        this.wallRebounce();
+        //this.wallRebounce();
 
         if (this.counter === this.time) {
             // chose new icon to appear
@@ -69,7 +69,7 @@ export default class L_special_wall {
                 this.drawerWallMoving = false;
                 this.drawerWallStatic = true;
                 this.wallStatic();
-                this.static.update();
+                //this.static.update();
                 break;
             case 2:
                 this.drawerWallStatic = false;
@@ -81,8 +81,8 @@ export default class L_special_wall {
                 break;
         }
         if(this.move){
-            this.static.wallMoving();
-            this.static.update();
+            this.game.wall.wallMoving();
+            //this.static.update();
         }
         this.counter++;
     }
@@ -118,8 +118,8 @@ export default class L_special_wall {
         if (this.counter === this.time) {
             this.positionIcon();
         } else if (this.hit()) {
-            this.static.position.x = this.position.x;
-            this.static.position.y = this.position.y;
+            this.game.wall.position.x = this.position.x;
+            this.game.wall.position.y = this.position.y;
             this.resetPos();
             this.first = false;
         }
@@ -130,8 +130,8 @@ export default class L_special_wall {
             this.positionIcon();
         } else if (this.hit()) {
             this.resetPos();
-            this.static.speed = this.static.maxSpeed;
-            this.static.wallMoving();// up and down on Y axis
+            this.game.wall.speed = this.game.wall.maxSpeed;
+            this.game.wall.wallMoving();// up and down on Y axis
             if(!this.move){
                this.move = true
             }
@@ -140,26 +140,25 @@ export default class L_special_wall {
             }
         }
     }
-
+/*
     wallRebounce(){
         if(this.game.ball.velocity_X > 0){ //moving right
-            if(this.game.ball.position.x + this.game.ball.size > this.static.position.x &&
-            this.game.ball.position.x + this.game.ball.size < this.static.position.x+this.static.width){ // on height of paddle x -axe
-                if(this.game.ball.position.y + this.game.ball.size > this.static.position.y && this.game.ball.position.y < this.static.position.y + this.static.height){
+            if(this.game.ball.position.x + this.game.ball.size > this.game.wall.position.x &&
+            this.game.ball.position.x + this.game.ball.size < this.game.wall.position.x+this.game.wall.width){ // on height of paddle x -axe
+                if(this.game.ball.position.y + this.game.ball.size > this.game.wall.position.y && this.game.ball.position.y < this.game.wall.position.y + this.game.wall.height){
                     this.game.ball.velocity_X = -this.game.ball.velocity_X;
                 }
-
             }
         }
         if(this.game.ball.velocity_X < 0){ //moving left
-            if(this.game.ball.position.x > this.static.position.x &&
-            this.game.ball.position.x < this.static.position.x + this.static.width){
-                if(this.game.ball.position.y + this.game.ball.size > this.static.position.y
-                && this.game.ball.position.y < this.static.position.y + this.static.height){
+            if(this.game.ball.position.x > this.game.wall.position.x &&
+            this.game.ball.position.x < this.game.wall.position.x + this.game.wall.width){
+                if(this.game.ball.position.y + this.game.ball.size > this.game.wall.position.y
+                && this.game.ball.position.y < this.game.wall.position.y + this.game.wall.height){
                     this.game.ball.velocity_X = -this.game.ball.velocity_X;
                 }
             }
         }
-    }
+    }*/
 
 }

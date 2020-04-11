@@ -1,13 +1,13 @@
-import L_paddle_player from "./player/l_paddle_player.js";
-import L_paddle_AI from "./ai/l_paddle_AI.js";
+import L_paddle_player from "./objects/l_paddle_player.js";
+import L_paddle_AI from "./objects/l_paddle_AI.js";
 
-import L_inputHandler_player from "./player/l_inputHandler_player.js";
-import L_inputHandler_AI from "./ai/l_inputHandler_AI.js";
-import L_ball from "./l_ball.js";
+import L_inputHandler_player from "./inputHandler/l_inputHandler_player.js";
+import L_inputHandler_AI from "./inputHandler/l_inputHandler_AI.js";
+import L_ball from "./objects/l_ball.js";
 import L_special_ball from "./level/special/l_specail_ball.js";
 import L_special_wall from "./level/special/l_specail_wall.js";
 import {L_level} from "./level/l_level.js";
-import L_wall from "./l_wall.js";
+import L_wall from "./objects/l_wall.js";
 
 const GAMESTATE = {
     PAUSED: 0,
@@ -30,7 +30,7 @@ export default class L_gameSinglePlayer {
         this.paddle_player = new L_paddle_player(this);
         this.paddle_AI = new L_paddle_AI(this)
         this.ball = new L_ball(this);
-        //this.wall = new L_wall(this);
+        this.wall = new L_wall(this);
         this.level = new L_level(this);
 
         //this.specials_ball = new L_special_ball(this);
@@ -41,7 +41,7 @@ export default class L_gameSinglePlayer {
             this.level,
             //this.specials_ball,
             //this.specials_wall,
-            //this.wall,
+            this.wall,
             this.ball
         ];
 

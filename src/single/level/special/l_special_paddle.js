@@ -16,15 +16,9 @@ export default class L_special_paddle {
         this.size = 80;
         this.counter = 0;
         this.index = 1;
-        this.sizes = {
-            1: 50,
-            2: 40,
-            3: 30,
-            4: 20,
-            5: 10
-        };
-        this.posX = [1, 3]; //except center (amount of columns)
-        this.posY = [1, 2, 3]; // amount of rows can be adjusted as ..100
+
+        this.posX = [2, 2]; //except center (amount of columns)
+        this.posY = [1, 2, 3, 4,5,6,7,8,9,10,11,12]; // amount of rows can be adjusted as ..100
         this.time = 150; //can be adjusted = "time" that the special effect stays on screen
 
         //total of 9 different positions
@@ -102,7 +96,6 @@ export default class L_special_paddle {
             this.drawerPaddleSmaller = true;
 
         } else {
-            console.log("Position " +this.game.ball.position.x);
             //check if span was hit by the ball, if so change paddle size
             if (this.game.ball.position.x >= this.position.x &&
                 this.game.ball.position.x <= this.position.x + this.size) {
@@ -222,7 +215,6 @@ export default class L_special_paddle {
                     }
                 }
             }
-
         }
     }
 }
