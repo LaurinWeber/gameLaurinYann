@@ -23,7 +23,7 @@ export default class L_special_wall {
         this.speed = 0; //at pause, start
         this.maxSpeed = 2;
 
-        this.posX = [2, 6]; //except center (amount of columns)
+        this.posX = [3, 5]; //except center (amount of columns)
         this.posY = [1, 2, 3]; // amount of rows can be adjusted as ..100
         this.time = 300; //can be adjusted = "time" that the special effect stays on screen
 

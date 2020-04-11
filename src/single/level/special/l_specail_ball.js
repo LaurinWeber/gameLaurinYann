@@ -16,13 +16,13 @@ export default class L_special_ball {
         this.counter = 0;
         this.sizes = [10,20,30,40,50];
 
-        this.posX = [1, 3]; //except center (amount of columns)
+        this.posX = [2, 6]; //except center (amount of columns)
         this.posY = [1, 2, 3, 4,5,6,7,8,9,10,11,12,13,14,15]; // amount of rows can be adjusted as ..100
         this.time = 300; //can be adjusted = "time" that the special effect stays on screen
 
         //total of 9 different positions
         this.spanPos = {
-            x: 1 * this.gameWidth / (this.posX.length + 2),
+            x: 1 * this.gameWidth / 8,//(this.posX.length + 2),
             y: 1 * this.gameHeight / (this.posY.length + 1)
         }; // first position in top left corner, (x*2, y*2) -> center.
         this.position = {x: 20, y: 20};

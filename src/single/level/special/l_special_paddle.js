@@ -32,7 +32,7 @@ export default class L_special_paddle {
             x: 1 * this.gameWidth / (this.posX.length + 2),
             y: 1 * this.gameHeight / (this.posY.length + 1)
         }; // first position in top left corner, (x*2, y*2) -> center.
-        this.position = {x: 20, y: 20};
+        this.position = {x: -100, y: -100};
     }
 
     // after update
@@ -58,6 +58,10 @@ export default class L_special_paddle {
 
     //before draw
     update() {
+        this.drawerPaddleSmaller = false;
+        this.drawerPaddleBigger = false;
+        this.drawerPaddleFaster= false;
+        this.drawerPaddleSlower= false;
         if (this.counter === this.time) {
             this.index = Math.floor(Math.random() * 4) + 1; //problem as you took factor *3 -> out of bounce so default was called that did nothing, and also the color of the arrows were black
         }
@@ -65,20 +69,23 @@ export default class L_special_paddle {
         switch (this.index) {
             case 1:
                 this.paddleSmaller();
+                this.drawerPaddleSmaller = true;
                 break;
             case 2:
                 this.paddleBigger();
+                this.drawerPaddleBigger = true;
                 break;
             case 3:
                 this.paddleFaster();
+                this.drawerPaddleFaster= true;
                 break;
             case 4:
                 this.paddleSlower();
+                this.drawerPaddleSlower= true;
                 break;
             default:
                 break;
         }
-
         this.counter++;
     }
 
@@ -106,10 +113,10 @@ export default class L_special_paddle {
                     this.position.y = -100;
                     //Change paddle size smaller
                     if (this.game.ball.velocity_X > 0) { //Ball moving to right
-                        this.game.paddle2.height = 100; //Make paddle2 smaller
+                        this.game.paddle_AI.height = 100; //Make paddle2 smaller
                     }
                     else if(this.game.ball.velocity_X < 0){ //Ball moving to left
-                        this.game.paddle.height = 100; //Make paddle1 smaller
+                        this.game.paddle_player.height = 100; //Make paddle1 smaller
                     }
                 }
             }
@@ -138,10 +145,10 @@ export default class L_special_paddle {
                     this.position.x = -100;
                     this.position.y = -100;
                     if (this.game.ball.velocity_X > 0) {//Ball moving to right
-                        this.game.paddle.height = 200; //Make paddle1 bigger
+                        this.game.paddle_AI.height = 200; //Make paddle1 bigger
                     }
                     else if(this.game.ball.velocity_X < 0){//Ball moving to left
-                        this.game.paddle2.height = 200; //Make paddle2 bigger
+                        this.game.paddle_player.height = 200; //Make paddle2 bigger
                     }
                 }
             }
@@ -173,10 +180,10 @@ export default class L_special_paddle {
                     this.position.x = -100;
                     this.position.y = -100;
                     if (this.game.ball.velocity_X > 0) {//Ball moving to right
-                        this.game.paddle.maxSpeed = 10; //Make paddle1 faster
+                        this.game.paddle_player.maxSpeed = 10; //Make paddle1 faster
                     }
                     else if(this.game.ball.velocity_X < 0){//Ball moving to left
-                        this.game.paddle2.maxSpeed = 10; //Make paddle2 faster
+                        this.game.paddle_AI.maxSpeed = 10; //Make paddle2 faster
                     }
                 }
             }
@@ -208,16 +215,14 @@ export default class L_special_paddle {
                     this.position.x = -100;
                     this.position.y = -100;
                     if (this.game.ball.velocity_X > 0) {//Ball moving to right
-                        this.game.paddle2.maxSpeed = 3; //Make paddle1 slower
+                        this.game.paddle_AI.maxSpeed = 3; //Make paddle1 slower
                     }
                     else if(this.game.ball.velocity_X < 0){//Ball moving to left
-                        this.game.paddle.maxSpeed= 3; //Make paddle2 slower
+                        this.game.paddle_player.maxSpeed= 3; //Make paddle2 slower
                     }
                 }
             }
 
         }
     }
-
-
 }

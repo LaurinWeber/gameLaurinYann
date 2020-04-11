@@ -15,12 +15,14 @@ export class L_level {
 
     // after update
     draw(context) {
+        this.level[1].draw(context);
         this.level[2].draw(context);
     }
 
     //before draw
     update() {
         this.levels();
+        this.level[1].update();
         this.level[2].update();
     }
 
