@@ -65,12 +65,12 @@ export default class Ball {
         this.scores();
     }// end Update
 
-    //Sound
+    /*Sound
     playSound(src) {
 
         var audio = new Audio(src);
         audio.play();
-    }
+    }*/
 
     // rebounce on left paddle
     paddle_left() {
@@ -85,7 +85,7 @@ export default class Ball {
         //paddle (left)
         if (this.position.x < player_x + player_width && this.position.x > player_x) { //Ball on height of paddle player
             if (this.position.y + this.size > player_y && this.position.y < player_y + player_height) { // ball hits paddle
-                this.playSound("sounds/bounce.mp3");//play bounce sound
+                this.game.sound.playSound("sounds/bounce.mp3");//play bounce sound
                 this.speed++; // everytime player hits paddle accelerating the ball
                 //define hitzone
                 //1.) hit at top "border" of paddle (rebounce: 45°)
@@ -141,7 +141,7 @@ export default class Ball {
         // paddle (right)
         if (this.position.x < ai_x + ai_width + this.size && this.position.x > ai_x - this.size) { //Ball on height paddle ai
             if (this.position.y - this.size / 2 > ai_y && this.position.y < ai_y + ai_height) {// ball hits paddel
-                this.playSound("sounds/bounce.mp3");//play bounce sound
+                this.game.sound.playSound("sounds/bounce.mp3");//play bounce sound
                 this.speed++; // everytime ai hits paddle accelerating the ball
                 //define hitzone
                 //1.) hit at top "border" of paddle (rebounce: 45°) = 10% of paddle height

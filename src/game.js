@@ -4,6 +4,7 @@ import SpecialPaddle from "./special_paddle.js";
 import Ball from "./ball.js";
 import InputHandler from "./inputHandler.js";
 import InputHandler2 from "./inputHandler2.js";
+import Sound from "./sound.js";
 
 const GAMESTATE = {
     PAUSED: 0,
@@ -32,6 +33,8 @@ export default class Game {
         this.specialPaddle = new SpecialPaddle(this);
 
         this.ball = new Ball(this);
+
+        this.sound = new Sound();
 
         new InputHandler(this.paddle, this);
         new InputHandler2(this.paddle2, this);
