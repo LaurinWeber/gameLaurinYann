@@ -65,6 +65,13 @@ export default class Ball {
         this.scores();
     }// end Update
 
+    /*Sound
+    playSound(src) {
+
+        var audio = new Audio(src);
+        audio.play();
+    }*/
+
     // rebounce on left paddle
     paddle_left() {
         //player
@@ -78,6 +85,7 @@ export default class Ball {
         //paddle (left)
         if (this.position.x < player_x + player_width && this.position.x > player_x) { //Ball on height of paddle player
             if (this.position.y + this.size > player_y && this.position.y < player_y + player_height) { // ball hits paddle
+                this.game.sound.playSound("sounds/bounce.mp3");//play bounce sound
                 this.speed++; // everytime player hits paddle accelerating the ball
                 //define hitzone
                 //1.) hit at top "border" of paddle (rebounce: 45°)
@@ -120,8 +128,11 @@ export default class Ball {
         }
     }
 
+
+
     //rebounce on right paddle
     paddle_right() {
+
         let ai_x = this.game.paddle2.position.x; //constant
         let ai_y = this.game.paddle2.position.y;
 
@@ -129,35 +140,36 @@ export default class Ball {
         let ai_width = this.game.paddle2.width;
         // paddle (right)
         if (this.position.x < ai_x + ai_width + this.size && this.position.x > ai_x - this.size) { //Ball on height paddle ai
-            if (this.position.y - this.size/2 > ai_y && this.position.y < ai_y + ai_height) { // ball hits paddel
+            if (this.position.y - this.size / 2 > ai_y && this.position.y < ai_y + ai_height) {// ball hits paddel
+                this.game.sound.playSound("sounds/bounce.mp3");//play bounce sound
                 this.speed++; // everytime ai hits paddle accelerating the ball
                 //define hitzone
                 //1.) hit at top "border" of paddle (rebounce: 45°) = 10% of paddle height
-                if (this.position.y + this.size/2 > ai_y && this.position.y + this.size <= ai_y + ai_height*.1) {
+                if (this.position.y + this.size / 2 > ai_y && this.position.y + this.size <= ai_y + ai_height * .1) {
                     // calculate velocities
                     this.velocity_X = -1 * Math.cos(this.radiant.top) * this.speed;
                     this.velocity_Y = -1 * Math.sin(this.radiant.top) * this.speed;
                 }
                 //2.) hit at upper center section of paddle (rebounce: 20°)
-                if (this.position.y + this.size/2 > ai_y + ai_height*.1 && this.position.y < ai_y + ((ai_height - ai_height*.2) / 3)) {
+                if (this.position.y + this.size / 2 > ai_y + ai_height * .1 && this.position.y < ai_y + ((ai_height - ai_height * .2) / 3)) {
                     // calculate velocities
                     this.velocity_X = -1 * Math.cos(this.radiant.upperCenter) * this.speed;
                     this.velocity_Y = -1 * Math.sin(this.radiant.upperCenter) * this.speed;
                 }
                 //3.) hit at center of paddle (rebounce: 0°)
-                if (this.position.y + this.size/2 >= ai_y + ((ai_height - ai_height*.2) / 3) && this.position.y <= ai_y + (2 * (ai_height - ai_height*.2) / 3)) {
+                if (this.position.y + this.size / 2 >= ai_y + ((ai_height - ai_height * .2) / 3) && this.position.y <= ai_y + (2 * (ai_height - ai_height * .2) / 3)) {
                     // calculate velocities
                     this.velocity_X = -Math.cos(this.radiant.center) * this.speed;
                     this.velocity_Y = Math.sin(this.radiant.center) * this.speed;
                 }
                 //4.) hit at lower center section of paddle (rebounce: -20°)
-                if (this.position.y + this.size/2 > ai_y + 2 * (ai_height - ai_height*.2) / 3 && this.position.y < ai_y + ai_height - ai_height*.1) {
+                if (this.position.y + this.size / 2 > ai_y + 2 * (ai_height - ai_height * .2) / 3 && this.position.y < ai_y + ai_height - ai_height * .1) {
                     // calculate velocities
                     this.velocity_X = (-1 * Math.cos(this.radiant.lowerCenter)) * this.speed;
                     this.velocity_Y = (-1 * Math.sin(this.radiant.lowerCenter)) * this.speed;
                 }
                 //5.) hit at bottom "border" of paddle (rebounce: -45°) = 10% of paddle height
-                if (this.position.y >= ai_y + ai_height - ai_height*.1 && this.position.y < ai_y + ai_height) {
+                if (this.position.y >= ai_y + ai_height - ai_height * .1 && this.position.y < ai_y + ai_height) {
                     // calculate velocities
                     this.velocity_X = -1 * Math.cos(this.radiant.bottom) * this.speed;
                     this.velocity_Y = -1 * Math.sin(this.radiant.bottom) * this.speed;
