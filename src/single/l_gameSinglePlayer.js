@@ -19,7 +19,7 @@ const GAMESTATE = {
 
 export default class L_gameSinglePlayer {
     constructor(gameWidth, gameHeight) {
-        this.gameWidth = gameWidth;
+                this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
 
         this.iconWidth = 130;
@@ -122,7 +122,7 @@ export default class L_gameSinglePlayer {
         }
     }
 
-
+/// ==============================================================================================
     pauseMenu(context) {
         //background
         context.rect(0, 0, this.gameWidth, this.gameHeight);
@@ -164,6 +164,7 @@ export default class L_gameSinglePlayer {
         // on hover
         if (this.onClick[0]) {
             // restart
+            this.create(context);
         }
         if (this.onClick[1]) {
             this.gamestate = GAMESTATE.RUNNING;
@@ -234,4 +235,7 @@ export default class L_gameSinglePlayer {
             return false;
         }
     }
+
+    /// ==============================================================================================
+
 }
