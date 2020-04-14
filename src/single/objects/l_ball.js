@@ -9,7 +9,7 @@ export default class L_ball {
 
         // get img from the ball
         this.image = document.getElementById("img_ball");
-        this.size = 30; // define size (x = 20 & y = 20 px)
+        this.size = 50; // define size (x = 20 & y = 20 px)
 
         // define boundaries for the ball, as already defined in game.js
         this.gameWidth = game.gameWidth;

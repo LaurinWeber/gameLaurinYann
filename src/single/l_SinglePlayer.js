@@ -19,12 +19,15 @@ var requestaframe;
 init();
 gameLoop();
 
-function init(){
+function init() {
     // background_canvas = document.getElementById('background_canvas');
     // background_ctx = main_canvas.getContext('2d');
 
     main_canvas = document.getElementById("main_canvas");
     main_context = main_canvas.getContext('2d');
+
+    document.getElementById("main_canvas").addEventListener("mousemove", mouse);
+    document.getElementById("main_canvas").addEventListener("click", click);
 
     // browserdetails to set the amount of pictures per sec. (default 60 per 1sec.)
     requestaframe = (function () {
@@ -38,26 +41,30 @@ function init(){
             };
     })();
 
-    game = new L_gameSinglePlayer(GAME_WIDTH,GAME_HEIGHT);
-    game.create(); //create the game
+    game = new L_gameSinglePlayer(GAME_WIDTH, GAME_HEIGHT);
+    game.create(main_context); //create the game
 }
 
-// get mouseEvent, from mouse hover to display the coordinates!
 function mouse(e) {
-    var x = e.pageX - document.getElementById('game_object').offsetLeft;
-    var y = e.pageY - document.getElementById('game_object').offsetTop;
-    document.getElementById('x').innerHTML = x;
-    document.getElementById('y').innerHTML = y;
+    var x = e.pageX - document.getElementById('main_canvas').offsetLeft;
+    var y = e.pageY - document.getElementById('main_canvas').offsetTop;
+    game.mouse(x,y);
 }
 
-function gameLoop(){
+function click(e) {
+    var x = e.pageX - document.getElementById('main_canvas').offsetLeft;
+    var y = e.pageY - document.getElementById('main_canvas').offsetTop;
+    game.mouseClick(x,y);
+}
 
-    main_context.clearRect(0,0,800,600);
+function gameLoop() {
+
+    main_context.clearRect(0, 0, 800, 600);
 
     game.update();
     game.draw(main_context);
 
-    if(is_playing){
+    if (is_playing) {
         requestaframe(gameLoop);
     }
 }

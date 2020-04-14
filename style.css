@@ -39,61 +39,205 @@ h1, h2 {
     border: 2px solid black;
 }
 
-#img_ball{
+#img_ball {
     display: none;
 }
 
 
-#img_bigger_paddle{
+#img_bigger_paddle {
     display: none;
 }
 
-#img_smaller_paddle{
+#img_smaller_paddle {
     display: none;
 }
 
-#img_faster_paddle{
+#img_faster_paddle {
     display: none;
 }
 
-#img_slower_paddle{
+#img_slower_paddle {
     display: none;
 }
 
-#img_resize{
-    display: none;
-}
-#img_plus{
-    display: none;
-}
-#img_minus{
-    display: none;
-}
-#img_bunny{
-    display: none;
-}
-#img_turtle{
-    display: none;
-}
-#img_wall{
+#img_resize {
     display: none;
 }
 
-#img_moving{
+#img_plus {
     display: none;
 }
 
-#img_wall_stat{
+#img_minus {
     display: none;
 }
+
+#img_bunny {
+    display: none;
+}
+
+#img_turtle {
+    display: none;
+}
+
+#img_wall {
+    display: none;
+}
+
+#img_moving {
+    display: none;
+}
+
+#img_wall_stat {
+    display: none;
+}
+
 /*===================== Laurin =====================*/
+.menu_object {
+    position: relative;
+    top: 5px;
+    bottom: 5px;
+}
+
+.img_music {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    height: 50px;
+    width: 50px;
+}
+.img_music:hover{
+    color: darkblue;
+}
+
+.wrapper_btn {
+    text-align: center;
+}
+
+.wrapper_img {
+
+}
+
+.wrapper_label {
+    padding-top: 10px;
+    font-family: Arial, sans-serif;
+    font-weight: bolder;
+    font-size: medium;
+}
+
+.img_icon {
+    height: 200px;
+    width: 200px;
+}
+
+.btn_single {
+    background-color: #3399ff;
+    border: 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: absolute;
+    width: 300px;
+    height: 250px;
+    right: 52%;
+    top: 50px;
+}
+
+.btn_single:hover {
+    background-color: #004080;
+    border: 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: absolute;
+    width: 300px;
+    height: 250px;
+    right: 52%;
+    top: 50px;
+}
+
+.btn_multi {
+    background-color: #3399ff;
+    border: 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: absolute;
+    width: 300px;
+    height: 250px;
+    left: 52%;
+    top: 50px;
+}
+
+.btn_multi:hover {
+    background-color: #004080;
+    border: 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: absolute;
+    width: 300px;
+    height: 250px;
+    left: 52%;
+    top: 50px;
+}
+.btn_leader {
+    background-color: #3399ff;
+    border: 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
+    width: 300px;
+    height: 250px;
+    center: 50%;
+    top: 350px;
+}
+
+.btn_leader:hover {
+    background-color: #004080;
+    border: 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
+    width: 300px;
+    height: 250px;
+    center: 50%;
+    top: 350px;
+}
+
+.background {
+    width: 100%;
+    bottom: 0px;
+
+}
+#game_object{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #main_canvas {
     border: 1px solid black;
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 800px;
     background-color: black;
+}
+
+#background_canvas {
+    border: 1px solid black;
+    background-color: red;
+}
+
+/*Buttons*/
+#img_restart{
+    display: none;
+}
+#img_restart_hover{
+    display: none;
+}
+#img_resume{
+    display: none;
+}
+#img_resume_hover{
+    display: none;
+}
+#img_home{
+    display: none;
+}
+#img_home_hover{
+    display: none;
 }
