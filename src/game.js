@@ -39,7 +39,6 @@ export default class Game {
         new InputHandler(this.paddle, this);
         new InputHandler2(this.paddle2, this);
 
-
         this.gameObjects = [
             this.paddle,
             this.paddle2,
