@@ -91,6 +91,27 @@ h1, h2 {
 #img_wall_stat {
     display: none;
 }
+/*===================== Leaderboard =====================*/
+.leaderbord{
+    background-color: #3399ff;
+    border: 2px solid black;
+    margin-left: 600px;
+    margin-right: 600px;
+    margin-top: 5%;
+}
+
+.img_trophy1{
+    position: absolute;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.img_trophy2{
+    position: absolute;
+    padding-left: 620px;
+    padding-top: 10px;
+}
+
 
 /*===================== Laurin =====================*/
 .menu_object {
