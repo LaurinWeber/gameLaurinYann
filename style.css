@@ -241,3 +241,21 @@ h1, h2 {
 #img_home_hover{
     display: none;
 }
+#img_singlePlayer{
+    display: none;
+}
+#img_singlePlayer_hover{
+    display: none;
+}
+#img_multiPlayer{
+    display: none;
+}
+#img_multiPlayer_hover{
+    display: none;
+}
+#img_leaderboard{
+    display: none;
+}
+#img_leaderboard_hover{
+    display: none;
+}

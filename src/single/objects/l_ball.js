@@ -84,6 +84,7 @@ export default class L_ball {
         //paddle (left)
         if (this.position.x < player_x + player_width && this.position.x > player_x) { //Ball on height of paddle player
             if (this.position.y + this.size > player_y && this.position.y < player_y + player_height) { // ball hits paddle
+                this.game.sound.playSound("sounds/bounce.mp3");
                 this.speed++; // everytime player hits paddle accelerating the ball
                 //define hitzone
                 //1.) hit at top "border" of paddle (rebounce: 45°)
@@ -140,6 +141,7 @@ export default class L_ball {
         // paddle (right)
         if (this.position.x + this.size > ai_x && this.position.x + this.size < ai_x + ai_width) { //Ball on height paddle ai
             if (this.position.y + this.size > ai_y && this.position.y < ai_y + ai_height) { // ball hits paddel
+                this.game.sound.playSound("sounds/bounce.mp3");
                 this.speed++; // everytime ai hits paddle accelerating the ball
                 //define hitzone
                 //1.) hit at top "border" of paddle (rebounce: 45°)
