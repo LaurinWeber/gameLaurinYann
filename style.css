@@ -280,3 +280,12 @@ h1, h2 {
 #img_leaderboard_hover{
     display: none;
 }
+#img_board{
+    display: none;
+}
+#img_x{
+    display: none;
+}
+#img_on{
+    display: none;
+}

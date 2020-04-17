@@ -33,6 +33,8 @@ export default class L_gameSinglePlayer {
 
         this.iconWidth = 130;
         this.iconHeight = 120;
+        this.iconWidth2 = 200;
+        this.iconHeight2 = 180;
         this.spacer = 50;
         // pause, gameover
         this.x1 = this.gameWidth / 2 - this.iconWidth / 2 - this.iconWidth - this.spacer;
@@ -40,12 +42,12 @@ export default class L_gameSinglePlayer {
         this.x3 = this.gameWidth / 2 + this.iconWidth / 2 + this.spacer;
         this.y1 = 3 * this.gameHeight / 5;
         // home
-        this.x4 = this.gameWidth / 2 - this.spacer - this.iconWidth;
-        this.x5 = this.gameWidth / 2 + this.spacer;
+        this.x4 = this.gameWidth / 2 - 10 - this.iconWidth2;
+        this.x5 = this.gameWidth / 2 + 10;
         this.x6 = this.gameWidth / 2 - 420 / 2;
 
-        this.y2 = this.gameHeight / 4;
-        this.y3 = 2 * this.gameHeight / 4;
+        this.y2 = this.gameHeight / 5;
+        this.y3 = 3 * this.gameHeight / 5;
 
         this.sound = new Sound();
 
@@ -63,6 +65,10 @@ export default class L_gameSinglePlayer {
         this.multiPlayer_hover = document.getElementById("img_multiPlayer_hover");
         this.leaderboard = document.getElementById("img_leaderboard");
         this.leaderboard_hover = document.getElementById("img_leaderboard_hover");
+
+        this.board = document.getElementById("img_board");
+        this.x = document.getElementById("img_x");
+        this.on = document.getElementById("img_on");
 
 
         this.onHover = Array(false, false, false, false, false, false);//restart, resume, home, singleplayer, multi, leaderboard
@@ -131,6 +137,10 @@ export default class L_gameSinglePlayer {
         if (this.gamestate === GAMESTATE.GAMEOVER) {
             this.gameOverMenu(context);
         }
+        //draw Leaderboard Screen
+        if (this.gamestate === GAMESTATE.HOME && this.playermode === PLAYERMODE.LEADER) {
+            this.leaderMenu(context);
+        }
 
     }
 
@@ -144,25 +154,44 @@ export default class L_gameSinglePlayer {
     }
 
     /// ==============================================================================================
+    leaderMenu(context) {
+        //background
+        context.rect(0, 0, this.gameWidth, this.gameHeight);
+        context.fillStyle = "#666666"
+        context.fill();
+
+        //draw background -> board
+        context.drawImage(this.board, this.gameWidth / 2 - 250, this.gameHeight / 2 - 250, 500, 500);
+
+        //draw X
+        context.drawImage(this.x, this.gameWidth -80, 30, 50, 50);
+
+        // onclick "X"
+    }
+
+    /// ==============================================================================================
     homeMenu(context) {
         //background
         context.rect(0, 0, this.gameWidth, this.gameHeight);
         context.fillStyle = "#666666"
         context.fill();
 
+        //draw music icon -> sound on / off
+        context.drawImage(this.on, this.gameWidth -80, 30, 50, 50);
+
         //buttons
         // on hover
         //1player
         if (this.onHover[3] == false) {
-            context.drawImage(this.singlePlayer, this.x4, this.y2, this.iconWidth, this.iconHeight);
+            context.drawImage(this.singlePlayer, this.x4, this.y2, this.iconWidth2, this.iconHeight2);
         } else {
-            context.drawImage(this.singlePlayer_hover, this.x4, this.y2, this.iconWidth, this.iconHeight);
+            context.drawImage(this.singlePlayer_hover, this.x4, this.y2, this.iconWidth2, this.iconHeight2);
         }
         //2player
         if (this.onHover[4] == false) {
-            context.drawImage(this.multiPlayer, this.x5, this.y2, this.iconWidth, this.iconHeight);
+            context.drawImage(this.multiPlayer, this.x5, this.y2, this.iconWidth2, this.iconHeight2);
         } else {
-            context.drawImage(this.multiPlayer_hover, this.x5, this.y2, this.iconWidth, this.iconHeight);
+            context.drawImage(this.multiPlayer_hover, this.x5, this.y2, this.iconWidth2, this.iconHeight2);
         }
         //leaderboard
         if (this.onHover[5] == false) {
@@ -270,6 +299,9 @@ export default class L_gameSinglePlayer {
         context.strokeStyle = "#fff";
         context.stroke();
 
+        //draw X
+        context.drawImage(this.x, this.gameWidth -80, 30, 50, 50);
+
         //Draw Buttons
         // on hover
         if (this.onHover[0] == false) {
@@ -347,13 +379,13 @@ export default class L_gameSinglePlayer {
         if (this.onHome(x, y)) {
             this.onClick[2] = true;
         }
-        if(this.onSingle(x,y)){
+        if (this.onSingle(x, y)) {
             this.onClick[3] = true;
         }
-        if(this.onMulti(x,y)){
+        if (this.onMulti(x, y)) {
             this.onClick[4] = true;
         }
-        if(this.onLeader(x,y)){
+        if (this.onLeader(x, y)) {
             this.onClick[5] = true;
         }
     }
@@ -386,8 +418,8 @@ export default class L_gameSinglePlayer {
     }
 
     onSingle(x, y) {
-        if (x >= this.x4 && x <= this.x4 + this.iconWidth &&
-            y >= this.y2 && y <= this.y2 + this.iconHeight) {
+        if (x >= this.x4 && x <= this.x4 + this.iconWidth2 &&
+            y >= this.y2 && y <= this.y2 + this.iconHeight2) {
             return true;
         } else {
             return false;
@@ -395,8 +427,8 @@ export default class L_gameSinglePlayer {
     }
 
     onMulti(x, y) {
-        if (x >= this.x5 && x <= this.x5 + this.iconWidth &&
-            y >= this.y2 && y <= this.y2 + this.iconHeight) {
+        if (x >= this.x5 && x <= this.x5 + this.iconWidth2 &&
+            y >= this.y2 && y <= this.y2 + this.iconHeight2) {
             return true;
         } else {
             return false;
