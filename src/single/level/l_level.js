@@ -11,13 +11,30 @@ export class L_level {
         this.life_Enemy = 3;
         this.life_Player = 3;
         this.level = [new l_specail_nothing(game), new l_specail_ball(game), new l_specail_wall(game), new l_special_paddle(game)];
+        this.heart = document.getElementById("img_heart");
     }
 
     // after update
     draw(context) {
         // draw hearts <3 to show # life left
-        context.fillText(this.life_Player, this.game.gameWidth / 2 - 200, 50);
-        context.fillText(this.life_Enemy, this.game.gameWidth / 2 + 200, 50);
+        //context.fillText(this.life_Player, this.game.gameWidth / 2 - 200, 50);
+
+        this.width1 = this.game.gameWidth / 2 - 50 -50; // space center + width icon
+        this.spacer1 = -75;
+        for(var i = 0; i<this.life_Player;i++){
+            //draw heart
+            context.drawImage(this.heart,this.width1, 30, 50, 50);
+            this.width1 = this.width1 + this.spacer1;
+        }
+
+        this.width = this.game.gameWidth / 2 + 50;
+        this.spacer = 50 +25;
+        for(var i = 0; i<this.life_Enemy;i++){
+            //draw heart
+            context.drawImage(this.heart,this.width, 30, 50, 50);
+            this.width = this.width + this.spacer;
+        }
+
         this.level[this.i].draw(context);
 
     }
