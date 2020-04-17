@@ -3,8 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+
+
+
 </head>
 <body>
+<div class="leaderbord">
+    <img class="img_trophy1" src="assets/trophy.png"/>
+    <img class="img_trophy2" src="assets/trophy.png"/>
+    <h1>Leaderboard</h1>
+    <h2 style="text-align:left;float:left;">Name</h2>
 
+
+
+    <div id="myList"></div>
+
+    <ol id="myOL" style="margin-top: 100px;">
+        <script>
+            var array = ["Yann", "Laurin", "Hans", "Peter"];
+
+            array.push("Hannes");
+
+            array.forEach(function(item) {
+                var li = document.createElement("li");
+                var text = document.createTextNode(item);
+                li.appendChild(text);
+                document.getElementById("myOL").appendChild(li);
+            });
+        </script>
+    </ol>
+
+</div>
 </body>
 </html>
