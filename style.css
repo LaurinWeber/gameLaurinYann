@@ -91,8 +91,44 @@ h1, h2 {
 #img_wall_stat {
     display: none;
 }
+/*===================== Manual =====================*/
+
+.table_manual_single{
+    margin: 50px;
+    border: 1px solid black;
+}
+
+.table_manual_multi{
+    margin: 50px;
+    border: 1px solid black;
+}
+
+.table_manual_symbols{
+    position: absolute;
+    margin-top: -420px;
+    margin-left: 400px;
+    border: 1px solid black;
+}
+
+.title_manual_symbols{
+    position: absolute;
+    margin-top: -500px;
+    margin-left: 400px;
+}
+
+.title_manual {
+    margin-left: 10%;
+    font-family: "TComic Sans MS", cursive, sans-serif;
+}
+
+.btn_manual_back{
+    height: 50px;
+    width: 50px;
+    margin-left: 10px;
+}
+
 /*===================== Leaderboard =====================*/
-.leaderbord{
+.leaderbord, .manual{
     background-color: #3399ff;
     border: 2px solid black;
     margin-left: 600px;
@@ -150,6 +186,11 @@ h1, h2 {
 .img_icon {
     height: 200px;
     width: 200px;
+}
+
+.img_icon_manual{
+    height: 50px;
+    width: 50px;
 }
 
 .btn_single {

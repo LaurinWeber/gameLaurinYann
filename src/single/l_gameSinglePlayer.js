@@ -164,7 +164,7 @@ export default class L_gameSinglePlayer {
         context.drawImage(this.board, this.gameWidth / 2 - 250, this.gameHeight / 2 - 250, 500, 500);
 
         //draw X
-        context.drawImage(this.x, this.gameWidth -80, 30, 50, 50);
+        context.drawImage(this.x, this.gameWidth - 80, 30, 50, 50);
 
         // onclick "X"
     }
@@ -177,7 +177,7 @@ export default class L_gameSinglePlayer {
         context.fill();
 
         //draw music icon -> sound on / off
-        context.drawImage(this.on, this.gameWidth -80, 30, 50, 50);
+        context.drawImage(this.on, this.gameWidth - 80, 30, 50, 50);
 
         //buttons
         // on hover
@@ -231,6 +231,7 @@ export default class L_gameSinglePlayer {
 
     /// ==============================================================================================
     gameOverMenu(context) {
+        this.gamestate = GAMESTATE.GAMEOVER;
         context.rect(0, 0, this.gameWidth, this.gameHeight);
         context.fillStyle = "#666666"
         context.fill();
@@ -248,6 +249,7 @@ export default class L_gameSinglePlayer {
         context.lineWidth = 2;
         context.strokeStyle = "#fff";
         context.stroke();
+
 
         //Draw Buttons
         // on hover
@@ -300,7 +302,7 @@ export default class L_gameSinglePlayer {
         context.stroke();
 
         //draw X
-        context.drawImage(this.x, this.gameWidth -80, 30, 50, 50);
+        context.drawImage(this.x, this.gameWidth - 80, 30, 50, 50);
 
         //Draw Buttons
         // on hover
