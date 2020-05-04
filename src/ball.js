@@ -37,11 +37,13 @@ export default class Ball {
             center: this.angle.center * Math.PI / 180,
             lowerCenter: this.angle.lowerCenter * Math.PI / 180,
             bottom: this.angle.bottom * Math.PI / 180
-        }
+        };
 
         // couter for the score
         this.scorePlayer = 0;
         this.scoreEnemy = 0;
+
+
     }
 
     // draw ball and score
@@ -63,14 +65,9 @@ export default class Ball {
             this.paddle_right();//rebounce
         }//end moving right
         this.scores();
+
     }// end Update
 
-    /*Sound
-    playSound(src) {
-
-        var audio = new Audio(src);
-        audio.play();
-    }*/
 
     // rebounce on left paddle
     paddle_left() {

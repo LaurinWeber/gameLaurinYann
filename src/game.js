@@ -16,14 +16,12 @@ const GAMESTATE = {
 export default class Game {
 
 
-
-
     constructor(gameWidth, gameHeight) {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
     }
 
-    start(){
+    start() {
 
         this.gamestate = GAMESTATE.MENU;
 
@@ -45,36 +43,33 @@ export default class Game {
             this.specialPaddle,
             this.ball
         ];
-
     }
 
 
-
-    update(deltaTime){
+    update(deltaTime) {
 
         //Check player score to GameOver
-        if (this.ball.scorePlayer1 === 5 ||this.ball.scorePlayer2 === 5){
+        if (this.ball.scorePlayer1 === 5 || this.ball.scorePlayer2 === 5) {
             this.gamestate = GAMESTATE.GAMEOVER;
         }
 
         //Stop updating when paused or in Menu
-        if (this.gamestate === GAMESTATE.PAUSED ||this.gamestate === GAMESTATE.GAMEOVER){
+        if (this.gamestate === GAMESTATE.PAUSED || this.gamestate === GAMESTATE.GAMEOVER) {
             return;
         }
 
-        this.gameObjects.forEach((object)=>object.update(deltaTime));
+        this.gameObjects.forEach((object) => object.update(deltaTime));
 
     }
 
 
-    draw(context){
+    draw(context) {
 
-        this.gameObjects.forEach((object)=>object.draw(context));
-
+        this.gameObjects.forEach((object) => object.draw(context));
 
         //Draw pause screen
-        if (this.gamestate === GAMESTATE.PAUSED){
-            context.rect(0,0,this.gameWidth,this.gameHeight);
+        if (this.gamestate === GAMESTATE.PAUSED) {
+            context.rect(0, 0, this.gameWidth, this.gameHeight);
             context.fillStyle = "#00b3b3"
             context.fill();
 
@@ -86,8 +81,8 @@ export default class Game {
         }
 
         //Draw Game over screen
-        if (this.gamestate === GAMESTATE.GAMEOVER){
-            context.rect(0,0,this.gameWidth,this.gameHeight);
+        if (this.gamestate === GAMESTATE.GAMEOVER) {
+            context.rect(0, 0, this.gameWidth, this.gameHeight);
             context.fillStyle = "#00b3b3"
             context.fill();
 
@@ -100,15 +95,14 @@ export default class Game {
 
     }
 
-    togglePause(){
+    togglePause() {
         //Pause
-        if (this.gamestate == GAMESTATE.PAUSED){
+        if (this.gamestate == GAMESTATE.PAUSED) {
             this.gamestate = GAMESTATE.RUNNING;
         } else {
             this.gamestate = GAMESTATE.PAUSED;
         }
     }
-
 
 
 }

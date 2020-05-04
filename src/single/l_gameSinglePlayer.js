@@ -21,7 +21,7 @@ const GAMESTATE = {
 };
 
 const PLAYERMODE = {
-    MULLTI: 0,
+    MULTI: 0,
     SINGLE: 1,
     LEADER: 2
 };
@@ -211,7 +211,7 @@ export default class L_gameSinglePlayer {
         }
         //2player
         if (this.onClick[4]) {
-            this.playermode = PLAYERMODE.MULLTI;
+            this.playermode = PLAYERMODE.MULTI;
             this.gamestate = GAMESTATE.RUNNING;
             for (var i = 0; i < this.onHover.length; i++) {
                 this.onHover[i] = false;
