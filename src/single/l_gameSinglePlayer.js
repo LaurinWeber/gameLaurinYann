@@ -2,6 +2,7 @@ import L_paddle_player from "./objects/l_paddle_player.js";
 import L_paddle_AI from "./objects/l_paddle_AI.js";
 
 import L_inputHandler_player from "./inputHandler/l_inputHandler_player.js";
+import InputHandler_enemy from "./inputHandler/l_inputHandler_enemy.js";
 import L_inputHandler_AI from "./inputHandler/l_inputHandler_AI.js";
 import L_ball from "./objects/l_ball.js";
 import L_special_ball from "./level/special/l_specail_ball.js";
@@ -78,7 +79,7 @@ export default class L_gameSinglePlayer {
     create(context) {
         this.context = context;
         this.gamestate = GAMESTATE.HOME;
-        this.playermode = null;
+
 
         this.paddle_player = new L_paddle_player(this);
         this.paddle_AI = new L_paddle_AI(this)
@@ -96,11 +97,7 @@ export default class L_gameSinglePlayer {
             //this.specials_wall,
             this.wall,
             this.ball
-        ];
-
-
-        new L_inputHandler_player(this.paddle_player, this);
-        this.ai = new L_inputHandler_AI(this.paddle_AI, this.ball, this);
+];
 
     }
 
@@ -116,7 +113,9 @@ export default class L_gameSinglePlayer {
         if (this.gamestate === GAMESTATE.PAUSED || this.gamestate === GAMESTATE.GAMEOVER) {
             return;
         }
-        this.ai.ai();
+        if(this.playermode == PLAYERMODE.SINGLE){
+            this.ai.ai();
+        }
         this.gameObjects.forEach((object) => object.update());
 
     }
@@ -225,6 +224,15 @@ export default class L_gameSinglePlayer {
                 this.onHover[i] = false;
                 this.onClick[i] = false;
             }
+        }
+        if(this.playermode == PLAYERMODE.SINGLE){
+            new L_inputHandler_player(this.paddle_player, this);
+            this.ai = new L_inputHandler_AI(this.paddle_AI, this.ball, this);
+        }
+
+        if(this.playermode == PLAYERMODE.MULTI){
+            new L_inputHandler_player(this.paddle_player, this);
+            new InputHandler_enemy(this.paddle_AI);
         }
 
     }
