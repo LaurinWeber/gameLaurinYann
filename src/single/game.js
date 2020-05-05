@@ -5,12 +5,10 @@ import L_inputHandler_player from "./inputHandler/l_inputHandler_player.js";
 import InputHandler_enemy from "./inputHandler/l_inputHandler_enemy.js";
 import L_inputHandler_AI from "./inputHandler/l_inputHandler_AI.js";
 import L_ball from "./objects/l_ball.js";
-import L_special_ball from "./level/special/l_specail_ball.js";
-import L_special_wall from "./level/special/l_specail_wall.js";
 import {L_level} from "./level/l_level.js";
 import L_wall from "./objects/l_wall.js";
 
-import Sound from "../sound.js";
+import Sound from "../yann/sound.js";
 
 const GAMESTATE = {
     PAUSED: 0,
@@ -33,7 +31,6 @@ export default class Game {
         this.gameHeight = gameHeight;
 
         this.sound = new Sound();
-
     }
 
     create(context, menu) {
@@ -44,7 +41,6 @@ export default class Game {
         this.ball = new L_ball(this);
         this.wall = new L_wall(this);
         this.level = new L_level(this);
-
 
         this.gameObjects = [
             this.paddle_player,

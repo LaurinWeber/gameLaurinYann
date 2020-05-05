@@ -11,8 +11,7 @@ var is_playing = true;
 // why no main_canvas & background_canvas??
 let main_canvas;
 let main_context;
-let background_canvas;
-let background_ctx;
+
 let menu // create instance of SinglePlayerGame
 var requestaframe;
 
@@ -20,9 +19,6 @@ init();
 gameLoop();
 
 function init() {
-    // background_canvas = document.getElementById('background_canvas');
-    // background_ctx = main_canvas.getContext('2d');
-
     main_canvas = document.getElementById("main_canvas");
     main_context = main_canvas.getContext('2d');
 

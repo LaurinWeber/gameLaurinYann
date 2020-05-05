@@ -3,7 +3,7 @@ import InputHandler_enemy from "./inputHandler/l_inputHandler_enemy.js";
 import L_inputHandler_AI from "./inputHandler/l_inputHandler_AI.js";
 import Game from "./game.js";
 
-import Sound from "../sound.js";
+import Sound from "../yann/sound.js";
 
 const GAMESTATE = {
     PAUSED: 0,
