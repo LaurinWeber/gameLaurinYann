@@ -61,7 +61,7 @@ export default class Menu {
         this.x = document.getElementById("img_x");
         this.on = document.getElementById("img_on");
 
-        this.onHover = Array(false, false, false, false, false, false);//restart, resume, home, singleplayer, multi, leaderboard
+        this.onHover = Array(false, false, false, false, false, false);//restart, resume, home, singleplayer, multi, exit
         this.onClick = Array(false, false, false, false, false, false);
     }
 
@@ -266,14 +266,9 @@ export default class Menu {
             context.drawImage(this.home_hover, this.x3, this.y1, this.iconWidth, this.iconHeight);
         }
         //onClick
-        if (this.onClick[0]) {
-
-            // restart
-
+        if (this.onClick[0]) {// restart
             this.Game.restart();
             this.gamestate = GAMESTATE.RUNNING;
-
-
             for (var i = 0; i < this.onHover.length; i++) {
                 this.onHover[i] = false;
                 this.onClick[i] = false;
@@ -288,9 +283,16 @@ export default class Menu {
             }
         }
 
-        if (this.onClick[2]) {
-            //home
+        if (this.onClick[2]) {//home
             this.gamestate = GAMESTATE.HOME;
+            for (var i = 0; i < this.onHover.length; i++) {
+                this.onHover[i] = false;
+                this.onClick[i] = false;
+            }
+        }
+
+        if (this.onClick[5]) { //exit "X"
+            this.gamestate = GAMESTATE.RUNNING;
             for (var i = 0; i < this.onHover.length; i++) {
                 this.onHover[i] = false;
                 this.onClick[i] = false;
@@ -318,8 +320,9 @@ export default class Menu {
         if (this.onMulti(x, y)) {
             this.onHover[4] = true;
         }
-        //console.log("x: " + x + "  y: " + y);
-        //console.log("x2: " + this.x1 + "  y2: " + this.y1);
+        if(this.onExit(x, y)){
+            this.onHover[5] = true;
+        }
     }
 
     mouseClick(x, y) {
@@ -337,6 +340,9 @@ export default class Menu {
         }
         if (this.onMulti(x, y)) {
             this.onClick[4] = true;
+        }
+        if(this.onExit(x, y)){
+            this.onClick[5] = true;
         }
     }
 
@@ -385,4 +391,13 @@ export default class Menu {
         }
     }
 
+    onExit(x, y) {
+        //draw X
+        if (x >= this.gameWidth - 80 && x <= this.gameWidth - 30 &&
+            y >= 30 && y <= 80) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
