@@ -35,7 +35,6 @@ export default class L_inputHandler_player {
             }
         });
 
-
     }
 
 }

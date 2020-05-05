@@ -66,37 +66,4 @@ export default class L_inputHandler_AI {
         }
     }
 
-    /* ==================================================================================
-            document.addEventListener("keydown", event => {
-
-                switch (event.keyCode) {
-                    case 38: // shift -> up
-                        l_paddle_AI.moveUp();
-                        event.preventDefault();
-                        break;
-                    case 40: // ctl -> down
-                        l_paddle_AI.moveDown();
-                        event.preventDefault();
-                        break;
-                }
-            });
-
-            //Stopping the paddle when key released
-            document.addEventListener("keyup", event => {
-
-                switch (event.keyCode) {
-                    case 38:
-                        l_paddle_AI.stop();
-                        event.preventDefault();
-                        break;
-                    case 40:
-                        l_paddle_AI.stop();
-                        event.preventDefault();
-                        break;
-                }
-            });
-
-    */
-
-
 }
