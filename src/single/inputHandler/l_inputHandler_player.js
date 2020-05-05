@@ -5,11 +5,11 @@ export default class L_inputHandler_player {
         document.addEventListener("keydown", event => {
 
             switch (event.keyCode) {
-                case 38: // shift -> up
+                case 87: // w -> up
                     l_paddle_player.moveUp();
                     event.preventDefault();
                     break;
-                case 40: // ctl -> down
+                case 83: // s -> down
                     l_paddle_player.moveDown();
                     event.preventDefault();
                     break;
@@ -24,11 +24,11 @@ export default class L_inputHandler_player {
         document.addEventListener("keyup", event => {
 
             switch (event.keyCode) {
-                case 38:
+                case 87: //w
                     l_paddle_player.stop();
                     event.preventDefault();
                     break;
-                case 40:
+                case 83: //s
                     l_paddle_player.stop();
                     event.preventDefault();
                     break;

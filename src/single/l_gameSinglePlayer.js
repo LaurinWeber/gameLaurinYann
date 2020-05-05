@@ -136,10 +136,7 @@ export default class L_gameSinglePlayer {
         if (this.gamestate === GAMESTATE.GAMEOVER) {
             this.gameOverMenu(context);
         }
-        //draw Leaderboard Screen
-        if (this.gamestate === GAMESTATE.HOME && this.playermode === PLAYERMODE.LEADER) {
-            this.leaderMenu(context);
-        }
+
 
     }
 
@@ -150,22 +147,6 @@ export default class L_gameSinglePlayer {
         } else {
             this.gamestate = GAMESTATE.PAUSED;
         }
-    }
-
-    /// ==============================================================================================
-    leaderMenu(context) {
-        //background
-        context.rect(0, 0, this.gameWidth, this.gameHeight);
-        context.fillStyle = "#666666"
-        context.fill();
-
-        //draw background -> board
-        context.drawImage(this.board, this.gameWidth / 2 - 250, this.gameHeight / 2 - 250, 500, 500);
-
-        //draw X
-        context.drawImage(this.x, this.gameWidth - 80, 30, 50, 50);
-
-        // onclick "X"
     }
 
     /// ==============================================================================================
@@ -192,12 +173,7 @@ export default class L_gameSinglePlayer {
         } else {
             context.drawImage(this.multiPlayer_hover, this.x5, this.y2, this.iconWidth2, this.iconHeight2);
         }
-        //leaderboard
-        if (this.onHover[5] == false) {
-            context.drawImage(this.leaderboard, this.x6, this.y3, 420, 100);
-        } else {
-            context.drawImage(this.leaderboard_hover, this.x6, this.y3, 420, 100);
-        }
+
         //onClick
         //1player
         if (this.onClick[3]) {
@@ -217,14 +193,7 @@ export default class L_gameSinglePlayer {
                 this.onClick[i] = false;
             }
         }
-        //leaderboard
-        if (this.onClick[5]) {
-            this.playermode = PLAYERMODE.LEADER;
-            for (var i = 0; i < this.onHover.length; i++) {
-                this.onHover[i] = false;
-                this.onClick[i] = false;
-            }
-        }
+
         if(this.playermode == PLAYERMODE.SINGLE){
             new L_inputHandler_player(this.paddle_player, this);
             this.ai = new L_inputHandler_AI(this.paddle_AI, this.ball, this);
@@ -445,15 +414,5 @@ export default class L_gameSinglePlayer {
         }
     }
 
-    onLeader(x, y) {
-        if (x >= this.x6 && x <= this.x6 + 420 &&
-            y >= this.y3 && y <= this.y3 + 100) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /// ==============================================================================================
 
 }

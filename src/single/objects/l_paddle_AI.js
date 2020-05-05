@@ -1,7 +1,15 @@
+
+const PLAYERMODE = {
+    MULTI: 0,
+    SINGLE: 1,
+    LEADER: 2
+};
+
 export default class L_paddle_AI {
 
     constructor(game) {
 
+        this.game = game;
         // get game boundaries
         this.gameWidth = game.gameWidth;
         this.gameHeight = game.gameHeight;
@@ -51,6 +59,7 @@ export default class L_paddle_AI {
         if (this.position.y < 1) {
             this.position.y = 1;
         }
+        if(this.game.playermode == PLAYERMODE.SINGLE)
         this.speed = 0; // set this so after one update keydown is being nutralised.. stop movement!
     }
 }
