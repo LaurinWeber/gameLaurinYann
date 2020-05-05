@@ -127,6 +127,8 @@ h1, h2 {
     margin-left: 10px;
 }
 
+
+
 /*===================== Leaderboard =====================*/
 .leaderbord, .manual{
     background-color: #3399ff;
@@ -148,7 +150,17 @@ h1, h2 {
     margin-left: 200px;
 }
 
+/*===================== Menu =====================*/
+#buttonSound{
+    display: inline;
+}
 
+#buttonManual{
+    position: absolute;
+    margin-left: 600px;
+    margin-top: -570px;
+    border-radius: 30%;
+}
 
 /*===================== Laurin =====================*/
 .menu_object {
