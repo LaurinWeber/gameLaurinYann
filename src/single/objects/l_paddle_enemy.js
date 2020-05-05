@@ -5,7 +5,7 @@ const PLAYERMODE = {
     LEADER: 2
 };
 
-export default class L_paddle_AI {
+export default class L_paddle_enemy {
 
     constructor(game) {
 

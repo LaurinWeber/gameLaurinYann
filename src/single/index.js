@@ -1,4 +1,4 @@
-import L_gameSinglePlayer from "./l_gameSinglePlayer.js";
+import Menu from "./menu.js";
 
 // constnats
 const GAME_WIDTH = 800;
@@ -13,7 +13,7 @@ let main_canvas;
 let main_context;
 let background_canvas;
 let background_ctx;
-let game // create instance of SinglePlayerGame
+let menu // create instance of SinglePlayerGame
 var requestaframe;
 
 init();
@@ -41,28 +41,28 @@ function init() {
             };
     })();
 
-    game = new L_gameSinglePlayer(GAME_WIDTH, GAME_HEIGHT);
-    game.create(main_context); //create the game
+    menu = new Menu(GAME_WIDTH, GAME_HEIGHT);
+    menu.create(main_context); //create the game
 }
 
 function mouse(e) {
     var x = e.pageX - document.getElementById('main_canvas').offsetLeft;
     var y = e.pageY - document.getElementById('main_canvas').offsetTop;
-    game.mouse(x,y);
+    menu.mouse(x,y);
 }
 
 function click(e) {
     var x = e.pageX - document.getElementById('main_canvas').offsetLeft;
     var y = e.pageY - document.getElementById('main_canvas').offsetTop;
-    game.mouseClick(x,y);
+    menu.mouseClick(x,y);
 }
 
 function gameLoop() {
 
     main_context.clearRect(0, 0, 800, 600);
 
-    game.update();
-    game.draw(main_context);
+    menu.update();
+    menu.draw(main_context);
 
     if (is_playing) {
         requestaframe(gameLoop);

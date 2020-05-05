@@ -1,6 +1,6 @@
 export default class L_inputHandler_player {
 
-    constructor(l_paddle_player, game) {
+    constructor(l_paddle_player, menu) {
 
         document.addEventListener("keydown", event => {
 
@@ -14,7 +14,7 @@ export default class L_inputHandler_player {
                     event.preventDefault();
                     break;
                 case 27: // ESC to pause the game
-                    game.togglePause();
+                    menu.togglePause();
                     event.preventDefault();
                     break;
             }

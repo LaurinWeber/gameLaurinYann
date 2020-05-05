@@ -1,14 +1,7 @@
-import L_paddle_player from "./objects/l_paddle_player.js";
-import L_paddle_AI from "./objects/l_paddle_AI.js";
-
 import L_inputHandler_player from "./inputHandler/l_inputHandler_player.js";
 import InputHandler_enemy from "./inputHandler/l_inputHandler_enemy.js";
 import L_inputHandler_AI from "./inputHandler/l_inputHandler_AI.js";
-import L_ball from "./objects/l_ball.js";
-import L_special_ball from "./level/special/l_specail_ball.js";
-import L_special_wall from "./level/special/l_specail_wall.js";
-import {L_level} from "./level/l_level.js";
-import L_wall from "./objects/l_wall.js";
+import Game from "./game.js";
 
 import Sound from "../sound.js";
 
@@ -27,7 +20,7 @@ const PLAYERMODE = {
     LEADER: 2
 };
 
-export default class L_gameSinglePlayer {
+export default class Menu {
     constructor(gameWidth, gameHeight) {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
@@ -45,10 +38,10 @@ export default class L_gameSinglePlayer {
         // home
         this.x4 = this.gameWidth / 2 - 10 - this.iconWidth2;
         this.x5 = this.gameWidth / 2 + 10;
-        this.x6 = this.gameWidth / 2 - 420 / 2;
 
-        this.y2 = this.gameHeight / 5;
-        this.y3 = 3 * this.gameHeight / 5;
+
+        this.y2 = this.gameHeight / 2 - this.iconWidth2;
+
 
         this.sound = new Sound();
 
@@ -64,13 +57,9 @@ export default class L_gameSinglePlayer {
         this.singlePlayer_hover = document.getElementById("img_singlePlayer_hover");
         this.multiPlayer = document.getElementById("img_multiPlayer");
         this.multiPlayer_hover = document.getElementById("img_multiPlayer_hover");
-        this.leaderboard = document.getElementById("img_leaderboard");
-        this.leaderboard_hover = document.getElementById("img_leaderboard_hover");
 
-        this.board = document.getElementById("img_board");
         this.x = document.getElementById("img_x");
         this.on = document.getElementById("img_on");
-
 
         this.onHover = Array(false, false, false, false, false, false);//restart, resume, home, singleplayer, multi, leaderboard
         this.onClick = Array(false, false, false, false, false, false);
@@ -79,63 +68,38 @@ export default class L_gameSinglePlayer {
     create(context) {
         this.context = context;
         this.gamestate = GAMESTATE.HOME;
-
-
-        this.paddle_player = new L_paddle_player(this);
-        this.paddle_AI = new L_paddle_AI(this)
-        this.ball = new L_ball(this);
-        this.wall = new L_wall(this);
-        this.level = new L_level(this);
-
-        //this.specials_ball = new L_special_ball(this);
-        //this.specials_wall = new L_special_wall(this);
-        this.gameObjects = [
-            this.paddle_player,
-            this.paddle_AI,
-            this.level,
-            //this.specials_ball,
-            //this.specials_wall,
-            this.wall,
-            this.ball
-];
-
     }
 
     //before draw
     update() {
-
-        //Check player score to GameOver
-        if (this.ball.scorePlayer === 15 || this.ball.scoreEnemy === 15) {
-            this.gamestate = GAMESTATE.GAMEOVER;
-        }
-
         //Stop updating when paused or in Menu
-        if (this.gamestate === GAMESTATE.PAUSED || this.gamestate === GAMESTATE.GAMEOVER) {
+        if (this.gamestate === GAMESTATE.PAUSED || this.gamestate === GAMESTATE.GAMEOVER || this.gamestate === GAMESTATE.HOME)
             return;
-        }
-        if(this.playermode == PLAYERMODE.SINGLE){
-            this.ai.ai();
-        }
-        this.gameObjects.forEach((object) => object.update());
+
+        if (this.playermode == PLAYERMODE.SINGLE || this.playermode == PLAYERMODE.MULTI && this.gamestate != GAMESTATE.PAUSED && this.gamestate != GAMESTATE.GAMEOVER)
+            this.Game.update();
 
     }
 
     //after update
     draw(context) {
-        this.gameObjects.forEach((object) => object.draw(context));
-
         //Draw pause screen
         if (this.gamestate === GAMESTATE.PAUSED) {
             this.pauseMenu(context);
+            return;
         }
         //Draw home menu screen
         if (this.gamestate === GAMESTATE.HOME) {
             this.homeMenu(context);
+            return;
         }
         //Draw Game over screen
         if (this.gamestate === GAMESTATE.GAMEOVER) {
             this.gameOverMenu(context);
+            return;
         }
+        if (this.playermode == PLAYERMODE.SINGLE || this.playermode == PLAYERMODE.MULTI && this.gamestate != GAMESTATE.PAUSED && this.gamestate != GAMESTATE.GAMEOVER && this.gamestate != GAMESTATE.HOME)
+            this.Game.draw(context);
 
 
     }
@@ -179,6 +143,13 @@ export default class L_gameSinglePlayer {
         if (this.onClick[3]) {
             this.playermode = PLAYERMODE.SINGLE;
             this.gamestate = GAMESTATE.RUNNING;
+            if (this.Game == null) {
+                this.Game = new Game(this.gameWidth, this.gameHeight);
+                this.Game.create(context, this);
+            } else {
+                this.Game.restart();
+            }
+
             for (var i = 0; i < this.onHover.length; i++) {
                 this.onHover[i] = false;
                 this.onClick[i] = false;
@@ -188,22 +159,18 @@ export default class L_gameSinglePlayer {
         if (this.onClick[4]) {
             this.playermode = PLAYERMODE.MULTI;
             this.gamestate = GAMESTATE.RUNNING;
+            if (this.Game == null) {
+                this.Game = new Game(this.gameWidth, this.gameHeight);
+                this.Game.create(context, this);
+            } else {
+                this.Game.restart();
+            }
+
             for (var i = 0; i < this.onHover.length; i++) {
                 this.onHover[i] = false;
                 this.onClick[i] = false;
             }
         }
-
-        if(this.playermode == PLAYERMODE.SINGLE){
-            new L_inputHandler_player(this.paddle_player, this);
-            this.ai = new L_inputHandler_AI(this.paddle_AI, this.ball, this);
-        }
-
-        if(this.playermode == PLAYERMODE.MULTI){
-            new L_inputHandler_player(this.paddle_player, this);
-            new InputHandler_enemy(this.paddle_AI);
-        }
-
     }
 
     /// ==============================================================================================
@@ -300,10 +267,20 @@ export default class L_gameSinglePlayer {
         }
         //onClick
         if (this.onClick[0]) {
+
             // restart
-            this.create(context);
+
+            this.Game.restart();
+            this.gamestate = GAMESTATE.RUNNING;
+
+
+            for (var i = 0; i < this.onHover.length; i++) {
+                this.onHover[i] = false;
+                this.onClick[i] = false;
+            }
         }
-        if (this.onClick[1]) {
+
+        if (this.onClick[1]) { //resume
             this.gamestate = GAMESTATE.RUNNING;
             for (var i = 0; i < this.onHover.length; i++) {
                 this.onHover[i] = false;
@@ -341,11 +318,8 @@ export default class L_gameSinglePlayer {
         if (this.onMulti(x, y)) {
             this.onHover[4] = true;
         }
-        if (this.onLeader(x, y)) {
-            this.onHover[5] = true;
-        }
-        console.log("x: " + x + "  y: " + y);
-        console.log("x2: " + this.x1 + "  y2: " + this.y1);
+        //console.log("x: " + x + "  y: " + y);
+        //console.log("x2: " + this.x1 + "  y2: " + this.y1);
     }
 
     mouseClick(x, y) {
@@ -363,9 +337,6 @@ export default class L_gameSinglePlayer {
         }
         if (this.onMulti(x, y)) {
             this.onClick[4] = true;
-        }
-        if (this.onLeader(x, y)) {
-            this.onClick[5] = true;
         }
     }
 
@@ -413,6 +384,5 @@ export default class L_gameSinglePlayer {
             return false;
         }
     }
-
 
 }
