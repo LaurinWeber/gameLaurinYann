@@ -191,6 +191,7 @@ export default class L_ball {
     scores() {
         // aiScore
         if (this.position.x <= 0) {
+            this.game.sound.playSound("sounds/score.mp3");
             this.scoreEnemy++;
             this.speed = this.speedStart;
             this.velocity_Y = 0;
@@ -200,6 +201,7 @@ export default class L_ball {
         }
         // playerScore
         if (this.position.x + this.size >= this.gameWidth) {
+            this.game.sound.playSound("sounds/score.mp3");
             this.scorePlayer++;
             this.speed = this.speedStart;
             this.velocity_Y = 0;
