@@ -25,6 +25,8 @@ export default class L_ball {
         this.velocity_X = -5;
         this.velocity_Y = 0;
 
+        this.speedMax = 25;
+
         this.angle = {
             top: 45,
             upperCenter: 20,
@@ -44,7 +46,7 @@ export default class L_ball {
         // couter for the score
         this.scorePlayer = 0;
         this.scoreEnemy = 0;
-           }
+    }
 
     // draw ball and score
     draw(context) {
@@ -85,7 +87,8 @@ export default class L_ball {
         if (this.position.x < player_x + player_width && this.position.x > player_x) { //Ball on height of paddle player
             if (this.position.y + this.size > player_y && this.position.y < player_y + player_height) { // ball hits paddle
                 this.game.sound.playSound("sounds/bounce.mp3");
-                this.speed++; // everytime player hits paddle accelerating the ball
+                if (!(this.speed == this.speedMax || this.speed >= this.speedMax))
+                    this.speed++; // everytime player hits paddle accelerating the ball
                 //define hitzone
                 //1.) hit at top "border" of paddle (rebounce: 45°)
                 if (this.position.y + this.size > player_y && this.position.y + this.size / 2 <= player_y + player_height * .05) { //5% of paddle height = hitzone 45°
@@ -142,7 +145,8 @@ export default class L_ball {
         if (this.position.x + this.size > ai_x && this.position.x + this.size < ai_x + ai_width) { //Ball on height paddle ai
             if (this.position.y + this.size > ai_y && this.position.y < ai_y + ai_height) { // ball hits paddel
                 this.game.sound.playSound("sounds/bounce.mp3");
-                this.speed++; // everytime ai hits paddle accelerating the ball
+                if (!(this.speed == this.speedMax || this.speed >= this.speedMax))
+                    this.speed++; // everytime ai hits paddle accelerating the ball
                 //define hitzone
                 //1.) hit at top "border" of paddle (rebounce: 45°)
                 if (this.position.y + this.size > ai_y && this.position.y + this.size / 2 <= ai_y + ai_height * .05) { //5% of paddle height = hitzone 45°

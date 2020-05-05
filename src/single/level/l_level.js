@@ -10,7 +10,7 @@ export class L_level {
         this.i = 0;
         this.life_Enemy = 3;
         this.life_Player = 3;
-        this.level = [new l_special_paddle(game)]; //new l_specail_nothing(game), new l_specail_ball(game), new l_specail_wall(game),
+        this.level = [new l_special_paddle(game) , new l_specail_nothing(game), new l_specail_ball(game), new l_specail_wall(game)];
         this.heart = document.getElementById("img_heart");
     }
 

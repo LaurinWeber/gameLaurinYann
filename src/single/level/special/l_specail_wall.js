@@ -24,7 +24,7 @@ export default class L_special_wall {
         this.maxSpeed = 2;
 
         this.posX = [3, 5]; //except center (amount of columns)
-        this.posY = [1, 2, 3, 4,5,6,7,8,9,10,11,12]; // amount of rows can be adjusted as ..100
+        this.posY = [1, 2, 3, 4,5,6,7,8]; // amount of rows can be adjusted as ..100
         this.time = 300; //can be adjusted = "time" that the special effect stays on screen
 
         //total of 9 different positions

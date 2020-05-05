@@ -14,10 +14,10 @@ export default class L_special_ball {
         //define span object size
         this.size = 80;
         this.counter = 0;
-        this.sizes = [10,20,30,40,50];
+        this.sizes = [10, 20, 30, 40, 50];
 
         this.posX = [2, 6]; //except center (amount of columns)
-        this.posY = [1, 2, 3, 4,5,6,7,8,9,10,11,12]; // amount of rows can be adjusted as ..100
+        this.posY = [1, 2, 3, 4, 5, 6, 7, 8]; // amount of rows can be adjusted as ..100
         this.time = 300; //can be adjusted = "time" that the special effect stays on screen
 
         //total of 9 different positions
@@ -131,7 +131,7 @@ export default class L_special_ball {
             this.resetPos();
             for (var i = 0; i < this.sizes.length; i++) {
                 if (this.game.ball.size == this.sizes[i]) {
-                    this.game.ball.size = this.sizes[i-1];
+                    this.game.ball.size = this.sizes[i - 1];
                     return;
                 }
             }
@@ -146,7 +146,7 @@ export default class L_special_ball {
             this.resetPos();
             for (var i = 0; i < this.sizes.length; i++) {
                 if (this.game.ball.size == this.sizes[i]) {
-                    this.game.ball.size = this.sizes[i+1];
+                    this.game.ball.size = this.sizes[i + 1];
                     return;
                 }
             }
@@ -168,7 +168,8 @@ export default class L_special_ball {
             this.positionIcon();
         } else if (this.hit()) {
             this.resetPos();
-            this.game.ball.speed = this.game.ball.speed + 8 ; //increase speed
+            if (!(this.game.ball.speed == this.game.ball.speedMax || this.game.ball.speed >= this.game.ball.speedMax))
+                this.game.ball.speed = this.game.ball.speed + 8; //increase speed
         }
     }
 }
