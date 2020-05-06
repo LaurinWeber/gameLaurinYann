@@ -29,7 +29,6 @@ export default class Game {
     constructor(gameWidth, gameHeight) {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
-
         this.sound = new Sound();
     }
 

@@ -1,9 +1,10 @@
 export default class Sound {
 
-    playSound(src) {
+    playSound(src, menu) {
 
-        var audio = new Audio(src);
-        audio.play();
+        if(menu.onSound){
+            var audio = new Audio(src);
+            audio.play();
+        }
     }
-
 }

@@ -44,6 +44,7 @@ export default class Menu {
 
 
         this.sound = new Sound();
+        this.onSound = true;
 
         this.legend = document.getElementById("img_legend");
         this.background = document.getElementById("img_background");
@@ -63,6 +64,7 @@ export default class Menu {
 
         this.x = document.getElementById("img_x");
         this.on = document.getElementById("img_on");
+        this.off = document.getElementById("img_off");
 
         this.onHover = Array(false, false, false, false, false, false);//restart, resume, home, singleplayer, multi, exit
         this.onClick = Array(false, false, false, false, false, false);
@@ -108,6 +110,8 @@ export default class Menu {
     }
 
     togglePause() {
+        if (this.gamestate == GAMESTATE.HOME)
+            return;
         //Pause
         if (this.gamestate == GAMESTATE.PAUSED) {
             this.gamestate = GAMESTATE.RUNNING;
@@ -125,8 +129,16 @@ export default class Menu {
 
         context.drawImage(this.background, 0, 0, this.gameWidth, this.gameHeight);
         //draw music icon -> sound on / off
-        context.drawImage(this.on, this.gameWidth - 80, 30, 50, 50);
-        context.drawImage(this.legend, this.gameWidth / 2 - 755/2/2, this.y1 - 50, 755/2, 568/2); // legende
+
+
+        if (this.onSound) {
+            context.drawImage(this.on, this.gameWidth - 80, 30, 50, 50);
+        } else {
+            context.drawImage(this.off, this.gameWidth - 80, 30, 50, 50);
+        }
+
+
+        context.drawImage(this.legend, this.gameWidth / 2 - 755 / 2 / 2, this.y1 - 50, 755 / 2, 568 / 2); // legende
 
         //buttons
         // on hover
@@ -176,6 +188,17 @@ export default class Menu {
                 this.onClick[i] = false;
             }
         }
+        if (this.onClick[5]) { //Sound on/Off "X"
+            if (this.onSound) {
+                this.onSound = false
+            } else {
+                this.onSound = true;
+            }
+            for (var i = 0; i < this.onHover.length; i++) {
+                this.onHover[i] = false;
+                this.onClick[i] = false;
+            }
+        }
     }
 
     /// ==============================================================================================
@@ -213,10 +236,15 @@ export default class Menu {
         } else {
             context.drawImage(this.home_hover, this.x3, this.y1, this.iconWidth, this.iconHeight);
         }
+
         //onClick
-        if (this.onClick[0]) {
-            // restart
-            this.create(context);
+        if (this.onClick[0]) {// restart
+            this.Game.restart();
+            this.gamestate = GAMESTATE.RUNNING;
+            for (var i = 0; i < this.onHover.length; i++) {
+                this.onHover[i] = false;
+                this.onClick[i] = false;
+            }
         }
 
         if (this.onClick[2]) {
@@ -227,7 +255,6 @@ export default class Menu {
                 this.onClick[i] = false;
             }
         }
-
     }
 
     /// ==============================================================================================
@@ -327,7 +354,7 @@ export default class Menu {
         if (this.onMulti(x, y)) {
             this.onHover[4] = true;
         }
-        if(this.onExit(x, y)){
+        if (this.onExit(x, y)) {
             this.onHover[5] = true;
         }
     }
@@ -348,7 +375,7 @@ export default class Menu {
         if (this.onMulti(x, y)) {
             this.onClick[4] = true;
         }
-        if(this.onExit(x, y)){
+        if (this.onExit(x, y)) {
             this.onClick[5] = true;
         }
     }

@@ -24,7 +24,7 @@ function init() {
 
     document.getElementById("main_canvas").addEventListener("mousemove", mouse);
     document.getElementById("main_canvas").addEventListener("click", click);
-    background = document.getElementById("img_background");
+    background = document.getElementById("img_uni");
 
     // browserdetails to set the amount of pictures per sec. (default 60 per 1sec.)
     requestaframe = (function () {
@@ -57,7 +57,7 @@ function click(e) {
 function gameLoop() {
 
     main_context.clearRect(0, 0, 800, 600);
-    //main_context.drawImage(background, 0, 0, 800, 600);
+    main_context.drawImage(background, 0, 0, 800, 600);
     menu.update();
     menu.draw(main_context);
 
