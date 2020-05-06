@@ -158,6 +158,7 @@ export default class Menu {
         //onClick
         //1player
         if (this.onClick[3]) {
+            this.sound.playSound("sounds/button.mp3",this);
             this.playermode = PLAYERMODE.SINGLE;
             this.gamestate = GAMESTATE.RUNNING;
             if (this.Game == null) {
@@ -174,6 +175,7 @@ export default class Menu {
         }
         //2player
         if (this.onClick[4]) {
+            this.sound.playSound("sounds/button.mp3",this);
             this.playermode = PLAYERMODE.MULTI;
             this.gamestate = GAMESTATE.RUNNING;
             if (this.Game == null) {
@@ -189,6 +191,7 @@ export default class Menu {
             }
         }
         if (this.onClick[5]) { //Sound on/Off "X"
+            this.sound.playSound("sounds/button.mp3",this);
             if (this.onSound) {
                 this.onSound = false
             } else {
@@ -239,6 +242,7 @@ export default class Menu {
 
         //onClick
         if (this.onClick[0]) {// restart
+            this.sound.playSound("sounds/button.mp3",this);
             this.Game.restart();
             this.gamestate = GAMESTATE.RUNNING;
             for (var i = 0; i < this.onHover.length; i++) {
@@ -249,6 +253,7 @@ export default class Menu {
 
         if (this.onClick[2]) {
             //home
+            this.sound.playSound("sounds/button.mp3",this);
             this.gamestate = GAMESTATE.HOME;
             for (var i = 0; i < this.onHover.length; i++) {
                 this.onHover[i] = false;
@@ -303,6 +308,7 @@ export default class Menu {
         }
         //onClick
         if (this.onClick[0]) {// restart
+            this.sound.playSound("sounds/button.mp3",this);
             this.Game.restart();
             this.gamestate = GAMESTATE.RUNNING;
             for (var i = 0; i < this.onHover.length; i++) {
@@ -312,6 +318,7 @@ export default class Menu {
         }
 
         if (this.onClick[1]) { //resume
+            this.sound.playSound("sounds/button.mp3",this);
             this.gamestate = GAMESTATE.RUNNING;
             for (var i = 0; i < this.onHover.length; i++) {
                 this.onHover[i] = false;
@@ -320,6 +327,7 @@ export default class Menu {
         }
 
         if (this.onClick[2]) {//home
+            this.sound.playSound("sounds/button.mp3",this);
             this.gamestate = GAMESTATE.HOME;
             for (var i = 0; i < this.onHover.length; i++) {
                 this.onHover[i] = false;
@@ -328,6 +336,7 @@ export default class Menu {
         }
 
         if (this.onClick[5]) { //exit "X"
+            this.sound.playSound("sounds/button.mp3",this);
             this.gamestate = GAMESTATE.RUNNING;
             for (var i = 0; i < this.onHover.length; i++) {
                 this.onHover[i] = false;
