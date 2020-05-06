@@ -279,9 +279,6 @@ export default class Menu {
         context.strokeStyle = "#fff";
         context.stroke();
 
-        //draw X
-        context.drawImage(this.x, this.gameWidth - 80, 30, 50, 50);
-
         //Draw Buttons
         // on hover
         if (this.onHover[0] == false) {
@@ -298,6 +295,11 @@ export default class Menu {
             context.drawImage(this.home, this.x3, this.y1, this.iconWidth, this.iconHeight);
         } else {
             context.drawImage(this.home_hover, this.x3, this.y1, this.iconWidth, this.iconHeight);
+        }
+        if (this.onHover[5] == false) { //draw X
+            context.drawImage(this.x, this.gameWidth - 80, 30, 50, 50);
+        } else {
+            context.drawImage(this.x, this.gameWidth - 80, 40, 50, 50);
         }
         //onClick
         if (this.onClick[0]) {// restart
