@@ -28,16 +28,7 @@ h1, h2 {
     padding-left: 1000px;
 }
 
-.start {
-    background-image: url("assets/background.gif");
-    width: 700px;
-    height: 128px;
-    padding-bottom: 100px;
-    padding-top: 100px;
-    margin-left: 400px;
-    margin-right: 200px;
-    border: 2px solid black;
-}
+
 
 #img_ball {
     display: none;

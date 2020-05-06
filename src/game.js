@@ -8,7 +8,7 @@ import L_ball from "./objects/l_ball.js";
 import {L_level} from "./level/l_level.js";
 import L_wall from "./objects/l_wall.js";
 
-import Sound from "../yann/sound.js";
+import Sound from "./sound/sound.js";
 
 const GAMESTATE = {
     PAUSED: 0,
