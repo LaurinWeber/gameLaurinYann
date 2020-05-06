@@ -38,12 +38,15 @@ export default class Menu {
         // home
         this.x4 = this.gameWidth / 2 - 10 - this.iconWidth2;
         this.x5 = this.gameWidth / 2 + 10;
-
+        this.yLegend = 4 * this.gameHeight / 5;
 
         this.y2 = this.gameHeight / 2 - this.iconWidth2;
 
 
         this.sound = new Sound();
+
+        this.legend = document.getElementById("img_legend");
+        this.background = document.getElementById("img_background");
 
         // get imgs
         this.restart = document.getElementById("img_restart");
@@ -120,8 +123,10 @@ export default class Menu {
         context.fillStyle = "#666666"
         context.fill();
 
+        context.drawImage(this.background, 0, 0, this.gameWidth, this.gameHeight);
         //draw music icon -> sound on / off
         context.drawImage(this.on, this.gameWidth - 80, 30, 50, 50);
+        context.drawImage(this.legend, this.gameWidth / 2 - 755/2/2, this.y1 - 50, 755/2, 568/2); // legende
 
         //buttons
         // on hover
@@ -179,6 +184,7 @@ export default class Menu {
         context.rect(0, 0, this.gameWidth, this.gameHeight);
         context.fillStyle = "#666666"
         context.fill();
+        context.drawImage(this.background, 0, 0, this.gameWidth, this.gameHeight);
 
         //Draw "GAME-OVER" Test ont the screen
         context.font = "30px Arial";
@@ -230,6 +236,7 @@ export default class Menu {
         context.rect(0, 0, this.gameWidth, this.gameHeight);
         context.fillStyle = "#666666"
         context.fill();
+        context.drawImage(this.background, 0, 0, this.gameWidth, this.gameHeight);
 
         //Draw "Paused" Test ont the screen
         context.font = "30px Arial";

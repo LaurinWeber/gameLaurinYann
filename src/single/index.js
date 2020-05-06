@@ -11,7 +11,7 @@ var is_playing = true;
 // why no main_canvas & background_canvas??
 let main_canvas;
 let main_context;
-
+let background;
 let menu // create instance of SinglePlayerGame
 var requestaframe;
 
@@ -24,6 +24,7 @@ function init() {
 
     document.getElementById("main_canvas").addEventListener("mousemove", mouse);
     document.getElementById("main_canvas").addEventListener("click", click);
+    background = document.getElementById("img_background");
 
     // browserdetails to set the amount of pictures per sec. (default 60 per 1sec.)
     requestaframe = (function () {
@@ -56,7 +57,7 @@ function click(e) {
 function gameLoop() {
 
     main_context.clearRect(0, 0, 800, 600);
-
+    //main_context.drawImage(background, 0, 0, 800, 600);
     menu.update();
     menu.draw(main_context);
 
