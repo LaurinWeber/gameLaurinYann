@@ -87,6 +87,9 @@ export default class Game {
         this.paddle_player.height = 150;
         this.paddle_AI.height = 150;
 
+        //reset levels
+        this.level.i = 0;
+
         if (this.menu.playermode == PLAYERMODE.SINGLE) {
             this.enemyHandler = null;
             this.ai = new L_inputHandler_AI(this.paddle_AI, this.ball, this);

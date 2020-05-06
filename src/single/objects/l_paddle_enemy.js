@@ -58,7 +58,10 @@ export default class L_paddle_enemy {
         if (this.position.y < 1) {
             this.position.y = 1;
         }
-        if (this.game.playermode == PLAYERMODE.SINGLE)
+        if (true){
+            console.log("Stop");
             this.speed = 0; // set this so after one update keydown is being nutralised.. stop movement!
+        }
+
     }
 }

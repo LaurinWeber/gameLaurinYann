@@ -17,17 +17,21 @@ export default class L_inputHandler_AI {
         this.rand = this.paddle_AI.maxSpeed * Math.random() * (this.max - this.min) + this.min;
 
         //console.log(this.paddle_AI.speed)
-        let pBall = Math.round((this.ball.position.y + this.ball.size / 2) / this.paddle_AI.maxSpeed) * this.paddle_AI.maxSpeed;
-        let pPaddle = Math.round((this.paddle_AI.position.y + this.paddle_AI.height / 2) / this.paddle_AI.maxSpeed) * this.paddle_AI.maxSpeed;
-        let pCenter = Math.round((this.game.gameHeight / 2) / this.paddle_AI.maxSpeed) * this.paddle_AI.maxSpeed;
-        //console.log("pBall : " + pBall);
-        //console.log("pPaddle : " + pPaddle);
+        let pBall = parseInt(Math.round((this.ball.position.y + this.ball.size / 2) / this.paddle_AI.maxSpeed) * this.paddle_AI.maxSpeed);
+        let pPaddle = parseInt(Math.round((this.paddle_AI.position.y + this.paddle_AI.height / 2) / this.paddle_AI.maxSpeed) * this.paddle_AI.maxSpeed);
+        let pCenter = parseInt((this.game.gameHeight / 2));
+        //let pCenter = (this.game.gameHeight / 2);
+        console.log("X : " + this.ball.velocity_X);
+        console.log("pBall : " + pBall);
+        console.log("pPaddle : " + pPaddle);
+        console.log("pCenter : " + pCenter);
 
         // ball is moving to the right
         if (this.ball.velocity_X > 0) {
+
             //ball is moving straight
             if (this.ball.velocity_Y == 0) {
-                pPaddle = Math.round((this.paddle_AI.position.y + 1 * this.paddle_AI.height / 3) / this.paddle_AI.maxSpeed) * this.paddle_AI.maxSpeed;
+                //pPaddle = Math.round((this.paddle_AI.position.y + 1 * this.paddle_AI.height / 3) / this.paddle_AI.maxSpeed) * this.paddle_AI.maxSpeed;
                 if (pBall > pPaddle) {
                     this.paddle_AI.moveDown();
                 }
@@ -37,14 +41,14 @@ export default class L_inputHandler_AI {
             }
             //ball is moving down
             if (this.ball.velocity_Y > 0) {
-                pPaddle = Math.round((this.paddle_AI.position.y + 2 * this.paddle_AI.height / 3) / this.paddle_AI.maxSpeed) * this.paddle_AI.maxSpeed;
+                //pPaddle = Math.round((this.paddle_AI.position.y + 2 * this.paddle_AI.height / 3) / this.paddle_AI.maxSpeed) * this.paddle_AI.maxSpeed;
                 if (pBall > pPaddle) {
                     this.paddle_AI.moveDown();
                 }
             }
             //ball is moving up
             if (this.ball.velocity_Y < 0) {
-                pPaddle = Math.round((this.paddle_AI.position.y + 1 * this.paddle_AI.height / 3) / this.paddle_AI.maxSpeed) * this.paddle_AI.maxSpeed;
+                //pPaddle = Math.round((this.paddle_AI.position.y + 1 * this.paddle_AI.height / 3) / this.paddle_AI.maxSpeed) * this.paddle_AI.maxSpeed;
                 if (pBall < pPaddle) {
                     /*//random number for speed to get some varity into the game
                     this.rand = this.paddle_AI.maxSpeed*Math.random()*(this.max-this.min) + this.min;
@@ -56,18 +60,20 @@ export default class L_inputHandler_AI {
 
         // ball is moving to the left
         if (this.ball.velocity_X < 0) {
+            if (pPaddle - pCenter == 0 || (pPaddle-pCenter >= -this.paddle_AI.maxSpeed && pPaddle-pCenter <= this.paddle_AI.maxSpeed)){ //if in center do nothing
+                return;
+            }
+
             // positioning the paddle always back to the center, after hit
-            //if ((pCenter - pPaddle < 0 || pCenter - pPaddle - this.paddle_AI.speedMax > 0) &&
-              //  (pCenter - pPaddle - this.paddle_AI.speedMax < 0 || pCenter - pPaddle + this.paddle_AI.speedMax > 0)) {
-                if (pCenter - pPaddle < 0) {
-                    // paddle above court center
-                    this.paddle_AI.moveUp();
-                }
-                // paddle below court center
-                if (pCenter - pPaddle > 0) {
-                    this.paddle_AI.moveDown();
-                }
-            //}
+            if (pCenter - pPaddle < 0) {
+                // paddle above court center
+                this.paddle_AI.moveUp();
+            }
+            // paddle below court center
+            else if (pCenter - pPaddle > 0) {
+                this.paddle_AI.moveDown();
+            }
+
         }
     }
 }

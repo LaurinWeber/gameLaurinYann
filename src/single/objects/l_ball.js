@@ -52,7 +52,7 @@ export default class L_ball {
     draw(context) {
         context.drawImage(this.image, this.position.x, this.position.y, this.size, this.size);
         context.font = "bold 24px Arial";
-        context.fillText(this.scorePlayer, 5, 300);
+        context.fillText(this.scorePlayer, 5 + 2, 300);
         context.fillText(this.scoreEnemy, 785, 300);
 
 
