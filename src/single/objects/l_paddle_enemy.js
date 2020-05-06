@@ -1,7 +1,6 @@
 const PLAYERMODE = {
     MULTI: 0,
     SINGLE: 1,
-    LEADER: 2
 };
 
 export default class L_paddle_enemy {
@@ -58,10 +57,8 @@ export default class L_paddle_enemy {
         if (this.position.y < 1) {
             this.position.y = 1;
         }
-        if (true){
-            console.log("Stop");
+        if (this.game.menu.playermode == PLAYERMODE.SINGLE){
             this.speed = 0; // set this so after one update keydown is being nutralised.. stop movement!
         }
-
     }
 }

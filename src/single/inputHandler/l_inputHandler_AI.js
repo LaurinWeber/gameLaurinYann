@@ -17,14 +17,16 @@ export default class L_inputHandler_AI {
         this.rand = this.paddle_AI.maxSpeed * Math.random() * (this.max - this.min) + this.min;
 
         //console.log(this.paddle_AI.speed)
+
         let pBall = parseInt(Math.round((this.ball.position.y + this.ball.size / 2) / this.paddle_AI.maxSpeed) * this.paddle_AI.maxSpeed);
         let pPaddle = parseInt(Math.round((this.paddle_AI.position.y + this.paddle_AI.height / 2) / this.paddle_AI.maxSpeed) * this.paddle_AI.maxSpeed);
         let pCenter = parseInt((this.game.gameHeight / 2));
         //let pCenter = (this.game.gameHeight / 2);
-        console.log("X : " + this.ball.velocity_X);
+        /*console.log("X : " + this.ball.velocity_X);
         console.log("pBall : " + pBall);
         console.log("pPaddle : " + pPaddle);
         console.log("pCenter : " + pCenter);
+     */
 
         // ball is moving to the right
         if (this.ball.velocity_X > 0) {
@@ -60,7 +62,7 @@ export default class L_inputHandler_AI {
 
         // ball is moving to the left
         if (this.ball.velocity_X < 0) {
-            if (pPaddle - pCenter == 0 || (pPaddle-pCenter >= -this.paddle_AI.maxSpeed && pPaddle-pCenter <= this.paddle_AI.maxSpeed)){ //if in center do nothing
+            if (pPaddle - pCenter == 0 || (pPaddle - pCenter >= -this.paddle_AI.maxSpeed && pPaddle - pCenter <= this.paddle_AI.maxSpeed)) { //if in center do nothing
                 return;
             }
 
@@ -75,5 +77,9 @@ export default class L_inputHandler_AI {
             }
 
         }
+    }
+
+    getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
     }
 }
