@@ -82,9 +82,12 @@ export default class Game {
         this.paddle_player.position.y = this.gameHeight / 2 - this.paddle_player.height/2;
         this.paddle_AI.position.y = this.gameHeight / 2 - this.paddle_AI.height/2;
 
-        //reset paddle size
         this.paddle_player.height = 150;
         this.paddle_AI.height = 150;
+
+        //reset velocity
+        //this.paddle_player.speed = this.paddle_player.maxSpeed;
+        //this.paddle_AI.speed = this.paddle_AI.maxSpeed;
 
         //reset levels
         this.level.i = 0;
